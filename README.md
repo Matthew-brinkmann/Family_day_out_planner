@@ -1,4 +1,4 @@
-# ⛱️ Famil Day Out Planner
+# ⛱️ Family Day Out Planner
 This poject is our final project for Holberton School. It is a simple web application that can be used to search a location on a specific date and will return a list of events at that location with futher details, like a map and weather information.
 
 ## 🌳 Environment:
@@ -28,6 +28,6 @@ python3 -m unittest discover tests
 ## 🐛 Bugs
 No known bugs at this time.
 ## ✍🏽 Authors
-- Yuan Fang
-- Jacqueline Lu
-- Matthew Brinkmann 
+- [Yuan Fang](https://github.com/yuan-fang-228)
+- [Jacqueline Lu](https://github.com/Jql11)
+- [Matthew Brinkmann](https://github.com/Matthew-brinkmann)
