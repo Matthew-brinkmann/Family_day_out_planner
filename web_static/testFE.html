@@ -7,6 +7,7 @@
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script>
         var queryData = {}
+        const now = new Date();
         function initialize() {
           var input = document.getElementById('searchTextField');
           var autocomplete = new google.maps.places.Autocomplete(input);
@@ -21,8 +22,19 @@
 
         $( function() {
             $("#datepicker").datepicker({
-            onSelect: function() { 
-                queryData["selected_date"] = $(this).datepicker('getDate'); 
+                dateFormat: 'dd-mm-yy',
+                minDate: now,
+                maxDate: '+300d',
+                onSelect: function() { 
+                    var date = $(this).datepicker('getDate');
+                    queryData["selected_date_event_api"] = $(this).datepicker().val(); 
+                    const differenceInDays = date.getTime() - now.getTime();
+                    const totalDaysInDays = Math.ceil(differenceInDays / (1000 * 3600 * 24));
+                    if (totalDaysInDays > 14) {
+                        queryData["selected_date_weather_api"] = $.datepicker.formatDate('yy-mm-dd', date);
+                    } else {
+                        queryData["selected_days_weather_api"] = totalDaysInDays
+                    }
             }
         });
         } );
@@ -38,7 +50,7 @@
         $( "#submitData" ).click(function() {
             if (queryData["place_address"] == undefined) {
                 alert("please enter an address")
-            } else if (queryData["selected_date"] == undefined) {
+            } else if (queryData["selected_date_event_api"] == undefined) {
                 alert("please select a date")
             } else {
                 console.log(queryData)
