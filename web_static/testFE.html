@@ -1,0 +1,39 @@
+<html>
+<head>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiRHXJEUt-23gAHLKug-_61DzD9CgtgUM&libraries=places"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+        var queryData = {}
+        function initialize() {
+          var input = document.getElementById('searchTextField');
+          var autocomplete = new google.maps.places.Autocomplete(input);
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                var place = autocomplete.getPlace();
+                queryData["place_address"] = place.formatted_address;
+                queryData["place_latitude"] = place.geometry.location.lat();
+                queryData["place_longitude"] = place.geometry.location.lng()
+                console.log(queryData)
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+        $( function() {
+            $("#datepicker").datepicker({
+            onSelect: function() { 
+                queryData["selected_date"] = $(this).datepicker('getDate'); 
+                console.log(queryData)
+            }
+        });
+        } );
+
+    </script>
+</head>
+<body>
+    <input id="searchTextField" type="text" size="50" placeholder="Enter a location" autocomplete="on" runat="server" />  
+    <br>
+    <p>Date: <input type="text" id="datepicker"></p>
+</body>
+</html>
