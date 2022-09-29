@@ -11,12 +11,6 @@ app.register_blueprint(app_views)
 corsInstance = CORS(app, resources={r"/*": {"origins": "0.0.0.0"}})
 
 
-@app.teardown_appcontext
-def tearDownDB(self):
-    """removes sqlalchemy session"""
-    storage.close()
-
-
 @app.errorhandler(404)
 def errorHandler(error):
     """returns a 404 error msg"""
