@@ -21,7 +21,7 @@ def stats():
 
 
 @app_views.route('/events', methods=['POST'], strict_slashes=False)
-def stats():
+def events():
     """ retrieves number of objects by type """
     info = request.get_json()
     info["found"] = "we got here"
