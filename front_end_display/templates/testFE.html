@@ -53,7 +53,16 @@
             } else if (queryData["selected_date_event_api"] == undefined) {
                 alert("please select a date")
             } else {
-                console.log(queryData)
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://0.0.0.0:5000/api/v1/events',
+                    data: JSON.stringify(queryData),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    success: function (data) {
+                        alert(data.found)
+                    }
+                });
             }
         });
     </script>
