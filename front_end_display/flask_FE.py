@@ -3,14 +3,14 @@
 dropdown menus and rental listings"""
 import os
 from flask import Flask, render_template
-app = Flask('web_dynamic')
+app = Flask('front_end_display')
 app.url_map.strict_slashes = False
 
 
 @app.route('/index')
 def display_hbnb():
     """Generate page with popdown menu of states/cities"""
-    return render_template('testFE_local.html')
+    return render_template('index_local.html')
 
 
 if __name__ == '__main__':
