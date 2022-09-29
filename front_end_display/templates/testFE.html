@@ -59,6 +59,7 @@
                     data: JSON.stringify(queryData),
                     dataType: 'json',
                     contentType: 'application/json',
+                    crossDomain: true,
                     success: function (data) {
                         alert(data.found)
                     }
