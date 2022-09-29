@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """module for flask app"""
 import os
-from flask import Flask, Blueprint, jsonify\
+from flask import Flask, Blueprint, jsonify
 from api.v1.views import app_views
 from flask_cors import CORS
 
