@@ -31,3 +31,10 @@ No known bugs at this time.
 - [Yuan Fang](https://github.com/yuan-fang-228)
 - [Jacqueline Lu](https://github.com/Jql11)
 - [Matthew Brinkmann](https://github.com/Matthew-brinkmann)
+
+
+build Docker Image:
+docker image build -t flask_docker .
+
+Run Docker Image:
+docker run -p 5000:5000 -d flask_docker
