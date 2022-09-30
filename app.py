@@ -12,7 +12,7 @@ corsInstance = CORS(app, resources={r"/*": {"origins": "*"}})
 @app.route('/')
 def display_hbnb():
     """Generate page with popdown menu of states/cities"""
-    return render_template('index_local.html')
+    return render_template('index.html')
 
 
 @app.route('/status', strict_slashes=False)

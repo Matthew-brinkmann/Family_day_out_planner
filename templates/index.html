@@ -1,6 +1,6 @@
 <html>
 <head>
-    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=API_KEY_GOES_HERE&libraries=places"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiRHXJEUt-23gAHLKug-_61DzD9CgtgUM&libraries=places"></script>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
@@ -55,13 +55,12 @@
             } else {
                 $.ajax({
                     type: 'POST',
-                    url: 'localhost:5000/api/v1/events',
+                    url: 'http://0.0.0.0:5000/events',
                     data: JSON.stringify(queryData),
                     dataType: 'json',
                     contentType: 'application/json',
                     crossDomain: true,
                     success: function (data) {
-                        console.log(data)
                         alert(data.found)
                     }
                 });
