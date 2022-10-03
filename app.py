@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """module for flask app"""
+from distutils.log import debug
 import os
 from flask import Flask, Blueprint, jsonify, render_template, request
 from flask_cors import CORS
@@ -45,4 +46,5 @@ def errorHandler(error):
 if __name__ == '__main__':
     app.run(host=os.getenv('FLASK_HOST') or '0.0.0.0',
             port=os.getenv('FLASK_PORT') or '5000',
+            debug=os.getenv('FLASK_DEBUG') or False,
             threaded=True)

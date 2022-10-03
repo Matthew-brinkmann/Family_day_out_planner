@@ -8,15 +8,11 @@ This project has been completed using python3 (3.8.5) Will add more technologies
 
 ### Clone the repo locally using this command
 ```
-gh repo clone https://github.com/Matthew-brinkmann/Family_day_out_planner
+git clone https://github.com/Matthew-brinkmann/Family_day_out_planner
 ```
-### build Docker Image:
+### Build and Run Docker Image:
 ```
-docker image build -t family_day_out_server .
-```
-### Run Docker Image:
-```
-docker run -p 5000:5000 -d family_day_out_server
+docker-compose up
 ```
 ## 🛂 Testing:
 All files, classes and functions can be tested with unit tests.
