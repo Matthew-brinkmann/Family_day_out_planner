@@ -33,7 +33,7 @@ def stats():
 def events():
     """ retrieves number of objects by type """
     info = request.get_json()
-    info["found"] = "we got here"
+    info["found"] = "Hello people"
     return jsonify(info)
 
 
