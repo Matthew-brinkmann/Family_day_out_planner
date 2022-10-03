@@ -32,7 +32,7 @@ def stats():
 @app.route('/events', methods=['POST'], strict_slashes=False)
 def events():
     """ retrieves number of objects by type """
-    info = request.get_json()
+    info = event_request_handler
     info["found"] = "Hello people"
     return jsonify(info)
 
