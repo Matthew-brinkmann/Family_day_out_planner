@@ -26,7 +26,8 @@ python3 -m unittest discover tests
 ## 📁 File descriptions:
 - models: contains all Python Scripting
 - tests: contains unit tests for python scripts
-- web_static: contains front end files
+- templates: contains front end files
+- docker: contains all files required for docker configurations
 
 ## 🐛 Bugs
 No known bugs at this time.
