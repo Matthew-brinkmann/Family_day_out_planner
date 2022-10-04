@@ -30,10 +30,12 @@ class ReturnDataTransferObject:
         """
         if type(eventList) is list:
             self.__eventList = eventList
-            self.__objectInformationDictionary[eventList] = eventList
+            self.__objectInformationDictionary["eventList"] = eventList
+        elif hasattr(self, "eventList"):
+            self.__eventList = self.__eventList
         else:
             self.__eventList = None
-            self.__objectInformationDictionary[eventList] = None
+            self.__objectInformationDictionary["eventList"] = None
 
     @property
     def weatherInformation(self):
@@ -48,7 +50,7 @@ class ReturnDataTransferObject:
         setter for weatherInformation
         """
         self.__weatherInformation = weatherInformation
-        self.__objectInformationDictionary[weatherInformation] = weatherInformation
+        self.__objectInformationDictionary["weatherInformation"] = weatherInformation
 
     @property
     def objectInformationDictionary(self):
