@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """module for flask app"""
-from distutils.log import debug
+from models.exceptions import *
+from models.system_request_handler import system_request_handler
 import os
 from flask import Flask, Blueprint, jsonify, render_template, request
 from flask_cors import CORS
@@ -32,9 +33,13 @@ def stats():
 @app.route('/events', methods=['POST'], strict_slashes=False)
 def events():
     """ retrieves number of objects by type """
-    info = event_request_handler
-    info["found"] = "Hello people"
-    return jsonify(info)
+    fullEventInformation = []
+    try:
+        fullEventInformation = system_request_handler.get_event_information(
+            request.get_json(silent=True))
+    except apiCallNonResposive:
+        fullEventInformation.append = {"error": "API did not call"}
+    return jsonify(fullEventInformation)
 
 
 @app.errorhandler(404)
