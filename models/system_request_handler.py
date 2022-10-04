@@ -15,8 +15,8 @@ class system_request_handler:
         will call the modules to get the weather information.
         """
         # created an object to hold all the information we require here, instead of storing them in seperate variables.
-        returnDTO = ReturnDataTransferObject()
+        returnEventDTO = ReturnDataTransferObject()
         # the following code will become uncommented as we bring the backend together.
         # returnDTO.eventList = get_event_information(eventRequestInformation)
         # returnDTO.weatherInformation = get_weather_information(eventRequestInformation)
-        return (returnDTO.toJson())
+        return (returnEventDTO.toJson())
