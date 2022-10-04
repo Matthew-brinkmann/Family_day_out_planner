@@ -33,13 +33,13 @@ def stats():
 @app.route('/events', methods=['POST'], strict_slashes=False)
 def events():
     """ retrieves number of objects by type """
-    fullEventInformation = []
+    fullReturnInformation = {}
     try:
-        fullEventInformation = system_request_handler.get_event_information(
+        fullReturnInformation = system_request_handler.get_event_information(
             request.get_json(silent=True))
     except apiCallNonResposive:
-        fullEventInformation.append = {"error": "API did not call"}
-    return jsonify(fullEventInformation)
+        fullReturnInformation.append = {"error": "API did not call"}
+    return jsonify(fullReturnInformation)
 
 
 @app.errorhandler(404)
