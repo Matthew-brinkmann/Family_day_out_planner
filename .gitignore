@@ -3,3 +3,4 @@ __pycache__/
 file.json
 *_local*
 .env
+.coverage
