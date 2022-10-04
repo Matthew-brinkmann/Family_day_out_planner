@@ -12,9 +12,9 @@ class ReturnDataTransferObject:
 
     def __init__(self):
         """how to initialize returnDTO"""
+        self.__objectInformationDictionary = {}
         self.eventList = None
         self.weatherInformation = None
-        self.__objectInformationDictionary = {}
 
     @property
     def eventList(self):
