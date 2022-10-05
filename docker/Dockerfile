@@ -8,6 +8,7 @@ COPY ./docker/requirements.txt /app/requirements.txt
 WORKDIR /app
 
 # install the dependencies and packages in the requirements file
+RUN pip3 install requests
 RUN pip install --trusted-host=pypi.org --trusted-host=files.pythonhosted.org --user -r requirements.txt
 
 CMD ["app.py"]

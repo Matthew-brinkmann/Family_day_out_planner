@@ -36,7 +36,7 @@ def events():
     fullReturnInformation = {}
     try:
         fullReturnInformation = SystemRequestHandler.get_all_return_information(
-            request.get_json(silent=True))
+            request.get_json())
     except ApiCallNonResposive:
         fullReturnInformation.append = {"error": "API did not call"}
     return jsonify(fullReturnInformation)
