@@ -3,7 +3,7 @@
 module to handle all custom exceptions.
 """
 
-class apiCallNonResposive(Exception):
+class ApiCallNonResposive(Exception):
     """Exception raised when an API call returns non 200
     """
 
@@ -16,4 +16,4 @@ class apiCallNonResposive(Exception):
 
     def __str__(self):
         """str definition"""
-        return ('{}'.format())
+        return (f'')
