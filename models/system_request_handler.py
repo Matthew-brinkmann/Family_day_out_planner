@@ -11,7 +11,7 @@ class SystemRequestHandler:
     This class handles all the incoming requests via API.
     """
     @staticmethod
-    def get_event_information(eventRequestInformation):
+    def get_all_return_information(eventRequestInformation):
         """
         will call the modules to get the weather information.
         """

@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """module for flask app"""
 from models.exceptions import *
-from models.system_request_handler import system_request_handler
+from models.system_request_handler import SystemRequestHandler
 import os
 from flask import Flask, Blueprint, jsonify, render_template, request
 from flask_cors import CORS
@@ -35,9 +35,9 @@ def events():
     """ retrieves number of objects by type """
     fullReturnInformation = {}
     try:
-        fullReturnInformation = system_request_handler.get_event_information(
+        fullReturnInformation = SystemRequestHandler.get_all_return_information(
             request.get_json(silent=True))
-    except apiCallNonResposive:
+    except ApiCallNonResposive:
         fullReturnInformation.append = {"error": "API did not call"}
     return jsonify(fullReturnInformation)
 
