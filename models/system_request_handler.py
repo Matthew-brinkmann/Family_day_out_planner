@@ -6,11 +6,12 @@ module to handle all incoming requests for server side information
 from models.exceptions import *
 from models.return_data_object import ReturnDataTransferObject
 
-class system_request_handler:
+class SystemRequestHandler:
     """
     This class handles all the incoming requests via API.
     """
-    def get_event_information(self, eventRequestInformation):
+    @staticmethod
+    def get_event_information(eventRequestInformation):
         """
         will call the modules to get the weather information.
         """
