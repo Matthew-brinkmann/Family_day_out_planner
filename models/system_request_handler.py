@@ -3,8 +3,10 @@
 module to handle all incoming requests for server side information
 """
 
+from models.event_request_handler import EventRequestHandler
 from models.exceptions import *
 from models.return_data_object import ReturnDataTransferObject
+
 
 class SystemRequestHandler:
     """
@@ -17,7 +19,9 @@ class SystemRequestHandler:
         """
         # created an object to hold all the information we require here, instead of storing them in seperate variables.
         returnEventDTO = ReturnDataTransferObject()
-        # the following code will become uncommented as we bring the backend together.
-        # returnDTO.eventList = get_event_information(eventRequestInformation)
+        eventHandler = EventRequestHandler(eventRequestInformation)
+        returnEventDTO.eventList = eventHandler.get_list_of_events_from_query()
         # returnDTO.weatherInformation = get_weather_information(eventRequestInformation)
+        # return (returnEventDTO.toJson())
+       
         return (returnEventDTO.toJson())
