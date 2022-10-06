@@ -3,6 +3,7 @@
 Contains the testing module for returnDTO
 """
 from models.return_data_object import ReturnDataTransferObject
+from models.exceptions import *
 import unittest
 
 
@@ -20,27 +21,28 @@ class TestReturnDTO(unittest.TestCase):
 
     def testObjectInit(self):
         """test RDTO initialised correctly"""
-        self.assertEqual(self.testReturnObject.objectInformationDictionary, {'eventList': None, 'weatherInformation': None})
-        self.assertEqual(self.testReturnObject.toJson(), '{"eventList": null, "weatherInformation": null}')
+        self.assertEqual(self.testReturnObject.objectInformationDictionary, {'eventList': [], 'weatherInformation': None})
+        self.assertEqual(self.testReturnObject.toJson(), '{"eventList": [], "weatherInformation": null}')
 
     def testEventListUpdate(self):
         """test RDTO can update Event List"""
-        self.assertEqual(self.testReturnObject.objectInformationDictionary, {'eventList': None, 'weatherInformation': None})
-        self.assertEqual(self.testReturnObject.eventList, None)
-        self.testReturnObject.eventList = 123
-        self.assertEqual(self.testReturnObject.objectInformationDictionary, {'eventList': None, 'weatherInformation': None})
-        self.assertEqual(self.testReturnObject.eventList, None)
+        self.assertEqual(self.testReturnObject.objectInformationDictionary, {'eventList': [], 'weatherInformation': None})
+        self.assertEqual(self.testReturnObject.eventList, [])
         self.testReturnObject.eventList = ["test", "object"]
         self.assertEqual(self.testReturnObject.objectInformationDictionary, {'eventList': ["test", "object"], 'weatherInformation': None})
         self.assertEqual(self.testReturnObject.eventList, ["test", "object"])
-        self.testReturnObject.eventList = 123
-        self.assertEqual(self.testReturnObject.objectInformationDictionary, {'eventList': ["test", "object"], 'weatherInformation': None})
-        self.assertEqual(self.testReturnObject.eventList, ["test", "object"])
+
+    def testExceptionRaise(self):
+        with self.assertRaises(ReturnDtoEventListNotSet):
+            self.testReturnObject.eventList = 123
+        with self.assertRaises(ReturnDtoEventListNotSet):
+            self.testReturnObject.eventList = None
+            
 
     def testWeatherInformationUpdate(self):
         """test RDTO can update weather Information"""
-        self.assertEqual(self.testReturnObject.objectInformationDictionary, {'eventList': None, 'weatherInformation': None})
+        self.assertEqual(self.testReturnObject.objectInformationDictionary, {'eventList': [], 'weatherInformation': None})
         self.assertEqual(self.testReturnObject.weatherInformation, None)
         self.testReturnObject.weatherInformation = 123
-        self.assertEqual(self.testReturnObject.objectInformationDictionary, {'eventList': None, 'weatherInformation': 123})
+        self.assertEqual(self.testReturnObject.objectInformationDictionary, {'eventList': [], 'weatherInformation': 123})
         self.assertEqual(self.testReturnObject.weatherInformation, 123)

@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """module for flask app"""
+from logging import exception
 from models.exceptions import *
 from models.system_request_handler import SystemRequestHandler
 import os
@@ -38,7 +39,10 @@ def events():
         fullReturnInformation = SystemRequestHandler.get_all_return_information(
             request.get_json())
     except ApiCallNonResposive:
-        fullReturnInformation.append = {"error": "API did not call"}
+        fullReturnInformation["error"] = "API did not call"
+    except ReturnDtoEventListNotSet as e:
+        fullReturnInformation["error"] = str(e)
+
     return jsonify(fullReturnInformation)
 
 

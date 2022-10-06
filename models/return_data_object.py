@@ -3,6 +3,7 @@
 module to handle all incoming requests for server side information
 """
 import json
+from models.exceptions import *
 
 
 class ReturnDataTransferObject:
@@ -13,7 +14,7 @@ class ReturnDataTransferObject:
     def __init__(self):
         """how to initialize returnDTO"""
         self.__objectInformationDictionary = {}
-        self.eventList = None
+        self.eventList = []
         self.weatherInformation = None
 
     @property
@@ -31,11 +32,8 @@ class ReturnDataTransferObject:
         if type(eventList) is list:
             self.__eventList = eventList
             self.__objectInformationDictionary["eventList"] = eventList
-        elif hasattr(self, "eventList"):
-            self.__eventList = self.__eventList
         else:
-            self.__eventList = None
-            self.__objectInformationDictionary["eventList"] = None
+            raise ReturnDtoEventListNotSet(eventList)
 
     @property
     def weatherInformation(self):
