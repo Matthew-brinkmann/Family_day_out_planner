@@ -4,4 +4,4 @@ file.json
 *_local*
 .env
 .coverage
-presentation/
+*.drawio
