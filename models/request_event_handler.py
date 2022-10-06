@@ -47,7 +47,10 @@ class EventRequestHandler:
     @classmethod
     def create_query_params(cls):
         '''cerates the query parameters'''
+        if not os.environ.get['EVENT_API_KEY']:
+            raise ServerEnvironVariablesNotSet("EVENT_API_KEY")
+        
         EventRequestHandler.params = {
             "engine": "google_events",
             "q": EventRequestHandler.queryUrl,
-            "api_key":os.environ['EVENT_API_KEY']}
+            "api_key":os.environ.get['EVENT_API_KEY']}

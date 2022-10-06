@@ -42,6 +42,8 @@ def events():
         fullReturnInformation["error"] = "API did not call"
     except ReturnDtoEventListNotSet as e:
         fullReturnInformation["error"] = str(e)
+    except ServerEnvironVariablesNotSet as e:
+        fullReturnInformation["error"] = str(e)
 
     return jsonify(fullReturnInformation)
 
