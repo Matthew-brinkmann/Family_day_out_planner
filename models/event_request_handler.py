@@ -22,21 +22,12 @@ class EventRequestHandler:
     def get_list_of_events_from_query(cls):
         """calls API and returns event List"""
         # below commented code has been tested, it worked. I commented it out to save our API calls
-        print("****************\n\n\n\n")
-        print(EventRequestHandler.url)
-        print()
-        print(EventRequestHandler.queryUrl)
-        print()
-        print(EventRequestHandler.params)
         apiResponse = requests.get(EventRequestHandler.url,
                                  params=EventRequestHandler.params,
                                  allow_redirects=False
                                  ).json()
         if apiResponse is None:
             raise ApiCallNonResposive
-        print("\n\n\n\n")
-        print(apiResponse)
-        print("***********\n\n\n\n")
         return (EventRequestHandler.extract_event_list_from_response(apiResponse))
 
     @classmethod
