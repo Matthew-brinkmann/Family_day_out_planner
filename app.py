@@ -40,10 +40,8 @@ def events():
             request.get_json())
     except ApiCallNonResposive:
         fullReturnInformation["error"] = "API did not call"
-    except ReturnDtoEventListNotSet as e:
-        fullReturnInformation["error"] = str(e)
-    except ServerEnvironVariablesNotSet as e:
-        fullReturnInformation["error"] = str(e)
+    except (ReturnDtoEventListNotSet, ServerEnvironVariablesNotSet) as error:
+        fullReturnInformation["error"] = str(error)
 
     return jsonify(fullReturnInformation)
 
