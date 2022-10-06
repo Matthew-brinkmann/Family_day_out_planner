@@ -3,7 +3,7 @@
 module to handle all incoming requests for server side information
 """
 
-from models.request_event_handler import EventRequestHandler
+from models.event_api_handler import EventRequestHandler
 from models.exceptions import *
 from models.return_data_object import ReturnDataTransferObject
 
