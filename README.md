@@ -14,6 +14,15 @@ git clone https://github.com/Matthew-brinkmann/Family_day_out_planner
 ```
 docker-compose up
 ```
+### Dependencies:
+* docker
+* docker-compose
+* .env file in root directory containing:
+```
+EVENT_API_KEY=<API KEY>
+MYSQL_ROOT_USER=<SQL USERNAME>
+MYSQL_ROOT_PASSWORD=<SQL PASSWORD>
+```
 ## 🛂 Testing:
 All files, classes and functions can be tested with unit tests.
 
