@@ -10,7 +10,7 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 corsInstance = CORS(app, resources={r"/*": {"origins": "*"}})
-
+exceptionsWithDescription = (ReturnDtoEventListNotSet, ServerEnvironVariablesNotSet)
 
 @app.route('/')
 def display_hbnb():
@@ -40,7 +40,7 @@ def events():
             request.get_json())
     except ApiCallNonResposive:
         fullReturnInformation["error"] = "API did not call"
-    except (ReturnDtoEventListNotSet, ServerEnvironVariablesNotSet) as error:
+    except exceptionsWithDescription as error:
         fullReturnInformation["error"] = str(error)
 
     return jsonify(fullReturnInformation)
