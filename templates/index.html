@@ -1,0 +1,73 @@
+<html>
+<head>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDiRHXJEUt-23gAHLKug-_61DzD9CgtgUM&libraries=places"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
+    <script>
+        // lines 10 - 22 are googles autocomplete + line 3 + line 46.
+        var queryData = {}
+        const now = new Date();
+        function initialize() {
+          var input = document.getElementById('searchTextField');
+          var autocomplete = new google.maps.places.Autocomplete(input);
+            google.maps.event.addListener(autocomplete, 'place_changed', function () {
+                var place = autocomplete.getPlace();
+                queryData["place_address"] = place.formatted_address;
+                queryData["place_latitude"] = place.geometry.location.lat();
+                queryData["place_longitude"] = place.geometry.location.lng()
+            });
+        }
+        google.maps.event.addDomListener(window, 'load', initialize);
+
+        $( function() {
+            $("#datepicker").datepicker({
+                dateFormat: 'dd-mm-yy',
+                minDate: now,
+                maxDate: '+300d',
+                onSelect: function() { 
+                    var date = $(this).datepicker('getDate');
+                    queryData["selected_date_event_api"] = $(this).datepicker().val(); 
+                    const differenceInDays = date.getTime() - now.getTime();
+                    const totalDaysInDays = Math.ceil(differenceInDays / (1000 * 3600 * 24));
+                    if (totalDaysInDays > 14) {
+                        queryData["selected_date_weather_api"] = $.datepicker.formatDate('yy-mm-dd', date);
+                    } else {
+                        queryData["selected_days_weather_api"] = totalDaysInDays
+                    }
+            }
+        });
+        } );
+    </script>
+</head>
+<body>
+    <h1>hello team</h1>
+    <input id="searchTextField" type="text" size="50" placeholder="Enter a location" autocomplete="on" runat="server" />  
+    <br>
+    <p>Select Date: <input type="text" id="datepicker"></p>
+    <br>
+    <button id="submitData">get Events</button>
+    <script>
+        $( "#submitData" ).click(function() {
+            if (queryData["place_address"] == undefined) {
+                alert("please enter an address")
+            } else if (queryData["selected_date_event_api"] == undefined) {
+                alert("please select a date")
+            } else {
+                $.ajax({
+                    type: 'POST',
+                    url: 'http://0.0.0.0:5000/events',
+                    data: JSON.stringify(queryData),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    crossDomain: true,
+                    success: function (data) {
+                        console.log(data)
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
