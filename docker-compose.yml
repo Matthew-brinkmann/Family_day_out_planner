@@ -11,6 +11,8 @@ services:
     command: ["python", "app.py"]
     volumes:
       - .:/app
+    env_file:
+      - .env
     environment:
       - FLASK_DEBUG=True
       - MYSQL_DB_URL=“mysql+pymysql://${MYSQL_ROOT_USER}:${MYSQL_ROOT_PASSWORD}@mysql:3306/fdo_db?charset=utf32_bin”
@@ -21,6 +23,8 @@ services:
     restart: always
     volumes:
       - db_data:/var/lib/mysql:rw
+    env_file:
+      - .env
     environment:
       - MYSQL_ROOT_PASSWORD="${MYSQL_ROOT_PASSWORD}"
 

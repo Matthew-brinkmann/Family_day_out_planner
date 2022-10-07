@@ -8,10 +8,12 @@ from flask import Flask, Blueprint, jsonify, render_template, request
 from flask_cors import CORS
 from flasgger import Swagger, LazyJSONEncoder
 from flasgger import swag_from
+import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_folder='family-day-out/build/static', template_folder='family-day-out/build')
 app.json_encoder = LazyJSONEncoder
-corsInstance = CORS(app, resources={r"/*": {"origins": "*"}})
+corsInstance = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 exceptionsWithDescription = (ReturnDtoEventListNotSet, ServerEnvironVariablesNotSet)
 
 @app.route('/')
@@ -21,8 +23,8 @@ def display_hbnb():
 swagger = Swagger(app, template=swagger_template,             
                   config=swagger_config)
 
-@swag_from("documentation/event_info.yml", methods=['GET'])
-@app.route('/api/event_information', methods=['GET'], strict_slashes=False)
+@swag_from("documentation/event_info.yml", methods=['POST'])
+@app.route('/api/event_information', methods=['POST'], strict_slashes=False)
 def events():
     """ retrieves number of objects by type """
     fullReturnInformation = {}

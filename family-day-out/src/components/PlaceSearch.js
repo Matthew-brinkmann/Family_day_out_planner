@@ -46,7 +46,7 @@ let totalDaysInDays = Math.ceil(Difference_In_Days / (1000 * 3600 * 24));
     if (coordinates.lat === null || coordinates.lng === null)
     alert("Please select a place in the dropdown list");
     fetch('http://0.0.0.0:5000/api/event_information', {
-        method: 'GET',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'crossDomain': true,
@@ -54,7 +54,7 @@ let totalDaysInDays = Math.ceil(Difference_In_Days / (1000 * 3600 * 24));
         body: JSON.stringify({ 'place_address': address, 
           'place_latitude': coordinates.lat, 
           'place_longitude': coordinates.lng, 
-          'selected_date_evet_api': Moment(startDate).format('DD-MM-YYYY'), 
+          'selected_date_event_api': Moment(startDate).format('DD-MM-YYYY'), 
           'selected_days_weather_api': totalDaysInDays})
         })
       }
