@@ -13,8 +13,9 @@ git clone https://github.com/Matthew-brinkmann/Family_day_out_planner
 ### Build and Run Docker Image:
 ```
 cd family-day-out
-npm install --force react-places-autocomplete
-npm install react-datepicker --force
+npm install --save react-places-autocomplete
+npm install react-datepicker --save
+npm install —save moment
 npm run build
 cd ..
 docker-compose up
@@ -22,6 +23,7 @@ docker-compose up
 ### Dependencies:
 * docker
 * docker-compose
+* python-dotenv
 * .env file in root directory containing:
 ```
 EVENT_API_KEY=<API KEY>

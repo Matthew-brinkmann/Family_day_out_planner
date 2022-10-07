@@ -8,6 +8,7 @@ from flask import Flask, Blueprint, jsonify, render_template, request
 from flask_cors import CORS
 from flasgger import Swagger, LazyJSONEncoder
 from flasgger import swag_from
+import os
 
 app = Flask(__name__, static_folder='family-day-out/build/static', template_folder='family-day-out/build')
 app.json_encoder = LazyJSONEncoder
