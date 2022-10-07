@@ -1,0 +1,106 @@
+tags:
+  - name: Get Events
+get:
+  description: None
+definitions:
+  200_response:
+    type: object
+    properties:
+      eventList:
+        type: array
+        items:
+          $ref: '#/definitions/eventlist'
+      weatherInformation:
+        type: array
+        items:
+          $ref: '#/definitions/weatherInformation'
+  eventlist:
+    type: object
+    properties:
+      title:
+        type: string
+      date:
+        type: string
+      address:
+        type: string
+      link:
+        type: string
+      event_location_map:
+        type: object
+        properties:
+          image:
+            type: string
+          link:
+            type: string
+          serpapi_link:
+            type: string
+      description:
+        type: string
+      ticket_info:
+        type: array
+        items:
+          $ref: '#/definitions/ticketInfo'
+      venue:
+        type: object
+        properties:
+          name:
+            type: string
+          rating:
+            type: number
+          reviews:
+            type: number
+          link:
+            type: string
+      thumbnail:
+        type: string
+      image:
+        type: string
+  weatherInformation:
+    type: string
+  ticketInfo:
+    type: object
+    properties:
+      source:
+        type: string
+      link:
+        type: string
+      link_type:
+        type: string
+  venueInfo:
+    type: object
+    properties:
+      
+responses:
+    '200':
+      description: A list of events and weather information
+      schema:
+        $ref: '#/definitions/200_response'
+    '400':
+      description: Bad Request
+    '500':
+      description: Internal Server Error
+parameters:
+      - name: place_address
+        description: googleAutoComplete.formatted_address
+        type: string
+        required: true
+      - name: place_latitude
+        description: googleAutoComplete.geometry.location.lat()
+        type: string
+        required: true
+      - name: place_longitude
+        description: googleAutoComplete.geometry.location.lng()
+        type: string
+        required: true
+      - name: selected_date_event_api
+        description: Date in format dd/mm/yyyy
+        type: string
+        required: true
+      - name: selected_date_weather_api
+        description: date in format yyyy-mm-dd
+        type: string
+        required: true
+      - name: selected_days_weather_api
+        description: number of days from today
+        type: string
+        required: true
