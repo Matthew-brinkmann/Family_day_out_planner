@@ -12,6 +12,11 @@ git clone https://github.com/Matthew-brinkmann/Family_day_out_planner
 ```
 ### Build and Run Docker Image:
 ```
+cd family-day-out
+npm install --force react-places-autocomplete
+npm install react-datepicker --force
+npm run build
+cd ..
 docker-compose up
 ```
 ### Dependencies:

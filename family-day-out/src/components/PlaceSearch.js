@@ -46,7 +46,7 @@ let totalDaysInDays = Math.ceil(Difference_In_Days / (1000 * 3600 * 24));
     if (coordinates.lat === null || coordinates.lng === null)
     alert("Please select a place in the dropdown list");
     fetch('http://0.0.0.0:5000/api/event_information', {
-        method: 'GET',
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'crossDomain': true,
