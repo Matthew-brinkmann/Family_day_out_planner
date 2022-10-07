@@ -1,14 +1,16 @@
 #!/usr/bin/python3
 """module for flask app"""
-from logging import exception
+from documentation.swagger_setup import *
 from models.exceptions import *
 from models.system_request_handler import SystemRequestHandler
 import os
 from flask import Flask, Blueprint, jsonify, render_template, request
 from flask_cors import CORS
-
+from flasgger import Swagger, LazyJSONEncoder
+from flasgger import swag_from
 
 app = Flask(__name__)
+app.json_encoder = LazyJSONEncoder
 corsInstance = CORS(app, resources={r"/*": {"origins": "*"}})
 exceptionsWithDescription = (ReturnDtoEventListNotSet, ServerEnvironVariablesNotSet)
 
@@ -16,22 +18,11 @@ exceptionsWithDescription = (ReturnDtoEventListNotSet, ServerEnvironVariablesNot
 def display_hbnb():
     """Generate page with popdown menu of states/cities"""
     return render_template('index.html')
+swagger = Swagger(app, template=swagger_template,             
+                  config=swagger_config)
 
-
-@app.route('/status', strict_slashes=False)
-def jsonStatus():
-    """ returns a JSON: "status": "OK" """
-    return jsonify(status='OK')
-
-
-@app.route('/stats', methods=['GET'], strict_slashes=False)
-def stats():
-    """ retrieves number of objects by type """
-    
-    return jsonify(stats='None')
-
-
-@app.route('/events', methods=['POST'], strict_slashes=False)
+@swag_from("documentation/event_info.yml", methods=['GET'])
+@app.route('/api/event_information', methods=['GET'], strict_slashes=False)
 def events():
     """ retrieves number of objects by type """
     fullReturnInformation = {}
