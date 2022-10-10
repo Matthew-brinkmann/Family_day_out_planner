@@ -10,4 +10,4 @@ WORKDIR /app
 # install the dependencies and packages in the requirements file
 RUN pip install --trusted-host=pypi.org --trusted-host=files.pythonhosted.org --user -r requirements.txt
 
-CMD ["app.py"]
+CMD ["api/app.py"]
