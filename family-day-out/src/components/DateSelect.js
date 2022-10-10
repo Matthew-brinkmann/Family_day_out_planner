@@ -5,8 +5,6 @@ import "react-datepicker/dist/react-datepicker.css";
 
 // CSS Modules, react-datepicker-cssmodules.css
 // import 'react-datepicker/dist/react-datepicker-cssmodules.css';
-
-
 const DateSelect = ({ startDate, newStartDate }) => {
   return (
     <DatePicker
