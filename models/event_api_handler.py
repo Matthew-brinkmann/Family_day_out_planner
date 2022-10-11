@@ -53,4 +53,4 @@ class EventRequestHandler:
         EventRequestHandler.params = {
             "engine": "google_events",
             "q": EventRequestHandler.queryUrl,
-            "api_key":os.environ.get('EVENT_API_KEY')}
+            "api_key": os.environ.get('EVENT_API_KEY')}
