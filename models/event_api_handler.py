@@ -29,6 +29,8 @@ class EventRequestHandler:
                                  ).json()
         if apiResponse is None:
             raise ApiCallNonResposive
+        if "event_results" not in apiResponse:
+            raise ApiReturnNoneResults
         return (EventRequestHandler.extract_event_list_from_response(apiResponse))
 
     @classmethod
