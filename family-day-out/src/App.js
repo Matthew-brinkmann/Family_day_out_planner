@@ -3,6 +3,7 @@ import backgrounImg from "./img/familyfun.jpeg";
 import { useState } from "react";
 import EventItem from "./components/EventItem";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
+import Moment from "moment";
 
 // const events_results = [
 //   {
@@ -101,8 +102,8 @@ function App() {
         place_address: address,
         place_latitude: coordinates.lat,
         place_longitude: coordinates.lng,
-        // selected_date_event_api: Moment(startDate).format("DD-MM-YYYY"),
-        selected_date_event_api: startDate,
+        selected_date_event_api: Moment(startDate).format("MMM Do YYYY"),
+        // selected_date_event_api: startDate,
         selected_days_weather_api: totalDaysInDays,
       }),
     })
