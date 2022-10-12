@@ -7,7 +7,7 @@ services:
       context: .
     container_name: fdo_dev_container
     ports:
-      - "5000:5000"
+      - "5006:5006"
     command: ["python", "-m", "api.app"]
     volumes:
       - .:/app
