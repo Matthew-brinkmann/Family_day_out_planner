@@ -20,6 +20,7 @@ npm run build
 cd ..
 docker-compose up
 ```
+The page can be viewed on localhost:5006
 ### Dependencies:
 * docker
 * docker-compose
@@ -27,6 +28,7 @@ docker-compose up
 * .env file in root directory containing:
 ```
 EVENT_API_KEY=<API KEY>
+WEATHER_API_KEY=<API KEY>
 MYSQL_ROOT_USER=<SQL USERNAME>
 MYSQL_ROOT_PASSWORD=<SQL PASSWORD>
 ```
