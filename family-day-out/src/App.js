@@ -132,8 +132,8 @@ function App() {
             event_image={event.image}
             description={event.description}
             event_link={event.link}
-            event_location_image={event.event_location_map.image}
-            event_location_direction={event.event_location_map.link}
+            event_location_image={event.event_location_map && event.event_location_map.image}
+            event_location_direction={event.event_location_map && event.event_location_map.link}
           /> )): "No results found"};
     </div>
   );
