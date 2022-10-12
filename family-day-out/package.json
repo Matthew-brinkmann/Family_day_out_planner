@@ -43,7 +43,6 @@
     ]
   },
   "devDependencies": {
-    "fork-ts-checker-webpack-plugin": "^7.2.13",
     "install-peers": "^1.0.4"
   }
 }
