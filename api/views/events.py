@@ -23,7 +23,6 @@ def events():
     except ApiCallNonResposive as error:
         fullReturnInformation["error"] = str(error)
     except ApiReturnNoneResults as error:
-        print("\n\n\n\tin except in events.py\n\n\n")
         fullReturnInformation["error1"] = str(error)
     except exceptionsWithDescription as error:
         fullReturnInformation["error2"] = str(error)
