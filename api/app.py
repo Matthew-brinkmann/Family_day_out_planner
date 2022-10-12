@@ -28,6 +28,6 @@ def errorHandler(error):
 
 if __name__ == '__main__':
     app.run(host=os.getenv('FLASK_HOST') or '0.0.0.0',
-            port=os.getenv('FLASK_PORT') or '5000',
+            port=os.getenv('FLASK_PORT') or '5006',
             debug=os.getenv('FLASK_DEBUG') or False,
             threaded=True)
