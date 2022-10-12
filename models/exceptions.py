@@ -55,7 +55,7 @@ class ServerEnvironVariablesNotSet(Exception):
 
 
 class ApiReturnNoneResults(Exception):
-    """Exception raised when an API call return None events list"""
+    """Exception raised when an API call return 200 response but is empty"""
 
     def __init__(self,
                  message="No events results for this query"):
