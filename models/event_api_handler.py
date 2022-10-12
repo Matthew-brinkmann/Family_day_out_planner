@@ -38,7 +38,7 @@ class EventRequestHandler:
         self.queryUrl = "Events in "\
                 + eventRequestInformation["place_address"]\
                 + " on "\
-                + self.format_date(eventRequestInformation["selected_date_event_api"])
+                + eventRequestInformation["selected_date_event_api"]
 
     def create_query_params(self):
         '''cerates the query parameters'''
@@ -57,8 +57,3 @@ class EventRequestHandler:
             raise ApiCallNonResposive
         if apiResponse.get("events_results") is None:
             raise ApiReturnNoneResults
-
-    def format_date(self, dateToFormat):
-        """ensure date is formatted correctly"""
-        onlyDate = re.search("(.*)T", dateToFormat)
-        return(onlyDate[0])
