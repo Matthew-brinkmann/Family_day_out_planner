@@ -6,6 +6,7 @@ module to handle all incoming requests for server side information
 import requests
 from models.exceptions import *
 import os
+import re
 
 
 class EventRequestHandler:
@@ -37,7 +38,7 @@ class EventRequestHandler:
         self.queryUrl = "Events in "\
                 + eventRequestInformation["place_address"]\
                 + " on "\
-                + eventRequestInformation["selected_date_event_api"]
+                + self.format_date(eventRequestInformation["selected_date_event_api"])
 
     def create_query_params(self):
         '''cerates the query parameters'''
@@ -56,3 +57,8 @@ class EventRequestHandler:
             raise ApiCallNonResposive
         if apiResponse.get("events_results") is None:
             raise ApiReturnNoneResults
+
+    def format_date(self, dateToFormat):
+        """ensure date is formatted correctly"""
+        onlyDate = re.search("(.*)T", dateToFormat)
+        return(onlyDate[0])
