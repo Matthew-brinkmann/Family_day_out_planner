@@ -2,7 +2,6 @@ import PlaceSearch from "./components/PlaceSearch";
 import backgrounImg from "./img/familyfun.jpeg";
 import { useState } from "react";
 import EventItem from "./components/EventItem";
-import Moment from "moment";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 
 // const events_results = [
@@ -102,7 +101,8 @@ function App() {
         place_address: address,
         place_latitude: coordinates.lat,
         place_longitude: coordinates.lng,
-        selected_date_event_api: Moment(startDate).format("DD-MM-YYYY"),
+        // selected_date_event_api: Moment(startDate).format("DD-MM-YYYY"),
+        selected_date_event_api: startDate,
         selected_days_weather_api: totalDaysInDays,
       }),
     })
@@ -122,7 +122,7 @@ function App() {
         newStartDate={setStartDate}
         startDate={startDate}
       />
-     {eventDisplay.map((event, index) => (
+     {eventDisplay ? eventDisplay.map((event, index) => (
           <EventItem
             key={index}
             title={event.title}
@@ -134,8 +134,7 @@ function App() {
             event_link={event.link}
             event_location_image={event.event_location_map.image}
             event_location_direction={event.event_location_map.link}
-          />
-        ))}
+          /> )): "No results found"};
     </div>
   );
 }
