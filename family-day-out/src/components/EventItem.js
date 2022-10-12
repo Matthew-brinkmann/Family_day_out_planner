@@ -28,10 +28,12 @@ function EventItem({
           <div>{event_date}</div>
           {/* add if condition, if doesn't exit => "No Image Available" */}
           <img src={event_location_image} alt="" />
+          {event_location_direction && 
           <div className="event-item_location">
             <img id="icon_location" src={Icon_location} alt="" />
             <a href={event_location_direction}>How to get here</a>
           </div>
+        }
         </div>
     </article>
   );
