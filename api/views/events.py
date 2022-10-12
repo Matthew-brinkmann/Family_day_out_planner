@@ -20,10 +20,13 @@ def events():
     try:
         fullReturnInformation = SystemRequestHandler.get_all_return_information(
             request.get_json())
-    except ApiCallNonResposive:
-        fullReturnInformation["error"] = "API did not call"
-    except exceptionsWithDescription as error:
+    except ApiCallNonResposive as error:
         fullReturnInformation["error"] = str(error)
+    except ApiReturnNoneResults as error:
+        print("\n\n\n\tin except in events.py\n\n\n")
+        fullReturnInformation["error1"] = str(error)
+    except exceptionsWithDescription as error:
+        fullReturnInformation["error2"] = str(error)
 
     return jsonify(fullReturnInformation)
 

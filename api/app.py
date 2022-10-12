@@ -11,7 +11,7 @@ from flasgger import LazyJSONEncoder, Swagger
 app = Flask(__name__, static_folder='../family-day-out/build/static', template_folder='../family-day-out/build')
 app.register_blueprint(app_views)
 app.register_blueprint(html_views)
-# cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 corsInstance = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 app.json_encoder = LazyJSONEncoder

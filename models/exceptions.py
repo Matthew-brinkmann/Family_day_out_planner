@@ -19,6 +19,7 @@ class ApiCallNonResposive(Exception):
         """str definition"""
         return (f'{self.message}')
 
+
 class ReturnDtoEventListNotSet(Exception):
     """Exception raised when an API call returns non 200
     """
@@ -35,6 +36,7 @@ class ReturnDtoEventListNotSet(Exception):
         """str definition"""
         return (f'{self.message} {str(self.typeSetTo)}')
 
+
 class ServerEnvironVariablesNotSet(Exception):
     """Exception raised when an API call returns non 200
     """
@@ -50,3 +52,17 @@ class ServerEnvironVariablesNotSet(Exception):
     def __str__(self):
         """str definition"""
         return (f'{self.message} {str(self.typeSetTo)}')
+
+
+class ApiReturnNoneResults(Exception):
+    """Exception raised when an API call return 200 response but is empty"""
+
+    def __init__(self,
+                 message="No events results for this query"):
+        """init for exception"""
+        self.message = message
+        super().__init__(self.message)
+
+    def __str__(self):
+        """str definition"""
+        return (f'{self.message}')

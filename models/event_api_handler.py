@@ -22,13 +22,11 @@ class EventRequestHandler:
     @classmethod
     def get_list_of_events_from_query(cls):
         """calls API and returns event List"""
-        # below commented code has been tested, it worked. I commented it out to save our API calls
         apiResponse = requests.get(EventRequestHandler.url,
-                                 params=EventRequestHandler.params,
-                                 allow_redirects=False
-                                 ).json()
-        if apiResponse is None:
-            raise ApiCallNonResposive
+                                   params=EventRequestHandler.params,
+                                   allow_redirects=False
+                                   ).json()
+        cls.verify_api_response(apiResponse)
         return (EventRequestHandler.extract_event_list_from_response(apiResponse))
 
     @classmethod
@@ -40,9 +38,9 @@ class EventRequestHandler:
     def create_query_url(cls, eventRequestInformation):
         """creates the class query URL"""
         EventRequestHandler.queryUrl = "Events in "\
-                   + eventRequestInformation["place_address"]\
-                   + " on "\
-                   + eventRequestInformation["selected_date_event_api"]
+                + eventRequestInformation["place_address"]\
+                + " on "\
+                + eventRequestInformation["selected_date_event_api"]
 
     @classmethod
     def create_query_params(cls):
@@ -53,4 +51,13 @@ class EventRequestHandler:
         EventRequestHandler.params = {
             "engine": "google_events",
             "q": EventRequestHandler.queryUrl,
-            "api_key":os.environ.get('EVENT_API_KEY')}
+            "api_key": os.environ.get('EVENT_API_KEY')}
+
+    @classmethod
+    def verify_api_response(cls, apiResponse):
+        """tests if the response is valid"""
+        if apiResponse is None:
+            raise ApiCallNonResposive
+        if apiResponse.get("events_results") is None:
+            print("\n\n\tin this exception\n\n")
+            raise ApiReturnNoneResults

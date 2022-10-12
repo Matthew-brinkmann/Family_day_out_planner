@@ -36,39 +36,12 @@ definitions:
             type: string
       description:
         type: string
-      ticket_info:
-        type: array
-        items:
-          $ref: '#/definitions/ticketInfo'
-      venue:
-        type: object
-        properties:
-          name:
-            type: string
-          rating:
-            type: number
-          reviews:
-            type: number
-          link:
-            type: string
       thumbnail:
         type: string
       image:
         type: string
   weatherInformation:
     type: string
-  ticketInfo:
-    type: object
-    properties:
-      source:
-        type: string
-      link:
-        type: string
-      link_type:
-        type: string
-  venueInfo:
-    type: object
-    properties:
       
 responses:
     '200':
