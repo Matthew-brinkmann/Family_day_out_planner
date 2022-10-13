@@ -58,7 +58,7 @@ class WeatherRequestHandler:
     @staticmethod
     def extract_weather_info_from_response(weatherApiResponse):
         """pulls out the required weather information from API call"""
-        return (weatherApiResponse["forecast"]["forecastday"][-1])
+        return (weatherApiResponse["forecast"]["forecastday"][-1]["day"])
 
     def verify_api_response(self, apiResponse):
         """tests if the response is valid"""
@@ -71,5 +71,4 @@ class WeatherRequestHandler:
         """call weather API and return weather information"""
         if weatherRequestInformation["selected_days_weather_api"] > 14:
             self.weatherRequestDataVerified = False
-        else:
-            self.selectedDayDifferences = weatherRequestInformation["selected_days_weather_api"]
+        self.selectedDayDifferences = weatherRequestInformation["selected_days_weather_api"]
