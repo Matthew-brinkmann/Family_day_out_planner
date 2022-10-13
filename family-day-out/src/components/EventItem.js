@@ -25,8 +25,7 @@ function EventItem({
           </div>
           <div>{event_address}</div>
           <div>{event_address_sub}</div>
-          <div>{event_date}</div>
-          {/* add if condition, if doesn't exit => "No Image Available" */}
+          <div style={{ color: "red" }}>{event_date}</div>
           <img src={event_location_image} alt="" />
           {event_location_direction && 
           <div className="event-item_location">
