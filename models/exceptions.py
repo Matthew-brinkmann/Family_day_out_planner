@@ -66,3 +66,17 @@ class ApiReturnNoneResults(Exception):
     def __str__(self):
         """str definition"""
         return (f'{self.message}')
+
+
+class TestRequestDataIncorrectFormat(Exception):
+    """Exception raised when the request on a test api is not correct format"""
+
+    def __init__(self,
+                 message="request Data does not contain correct information"):
+        """init for exception"""
+        self.message = message
+        super().__init__(self.message)
+
+    def __str__(self):
+        """str definition"""
+        return (f'{self.message}')

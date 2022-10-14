@@ -1,7 +1,7 @@
 tags:
-  - name: Get Events
+  - name: Test Get Events
 get:
-  description: None
+  description: this returns the same data each time for the purpose of testing front end.
 definitions:
   200_response:
     type: object
@@ -19,7 +19,7 @@ definitions:
     properties:
       title:
         type: string
-      maxtemp_f:
+      date:
         type: string
       address:
         type: string
@@ -87,14 +87,14 @@ definitions:
           code:
             type: number
       uv:
-        type: number  
+        type: number
 responses:
     '200':
       description: A list of events and weather information
       schema:
         $ref: '#/definitions/200_response'
     '400':
-      description: Bad Request
+      description: Bad Request, the put requet was in the wrong format.
     '500':
       description: Internal Server Error
 parameters:
