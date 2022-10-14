@@ -1,11 +1,20 @@
 import DateSelect from "./DateSelect";
 import Header from "./Header";
-import PlacesAutocomplete from "react-places-autocomplete"; 
+import PlacesAutocomplete from "react-places-autocomplete";
 
-const PlaceSearch = ({ address, handleClick, handleSelect, handleChange, searchClick, newStartDate, startDate }) => {
-
+const PlaceSearch = ({
+  isLoading,
+  address,
+  handleClick,
+  handleSelect,
+  handleChange,
+  searchClick,
+  newStartDate,
+  startDate,
+}) => {
   return (
-    <div><Header title="Family Day Out Planner" />
+    <div>
+      <Header title="Family Day Out Planner" />
       <PlacesAutocomplete
         value={address}
         onChange={(value) => handleChange(value)}
@@ -18,9 +27,11 @@ const PlaceSearch = ({ address, handleClick, handleSelect, handleChange, searchC
               {...getInputProps({ placeholder: "Search Places" })}
             />
             <div className="react-datepicker-container">
-            <DateSelect newStartDate={newStartDate} startDate={startDate} />
+              <DateSelect newStartDate={newStartDate} startDate={startDate} />
             </div>
-            <button onClick={searchClick} className="btn">Search</button>
+            <button onClick={searchClick} disabled={isLoading} className="btn">
+              Search
+            </button>
             <div className="autocomplete-dropdown-container">
               {loading && <div>Loading...</div>}
               {suggestions.map((suggestion, index) => {
@@ -44,4 +55,4 @@ const PlaceSearch = ({ address, handleClick, handleSelect, handleChange, searchC
     </div>
   );
 };
-export default PlaceSearch
+export default PlaceSearch;

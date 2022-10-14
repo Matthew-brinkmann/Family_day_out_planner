@@ -4,62 +4,20 @@ import { useState } from "react";
 import EventItem from "./components/EventItem";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import Moment from "moment";
+import LoadingSpinner from "./components/LoadingSpinner";
 
-// const events_results = [
-//   {
-//     title: "Avi Avital",
-//     date: {
-//       start_date: "Sep 24",
-//       when: "Sat, Sep 24, 7 – 9 PM GMT+10",
-//     },
-//     address: [
-//       "Melbourne Recital Centre, 31 Sturt St",
-//       "Southbank VIC, Australia",
-//     ],
-//     link: "https://www.songkick.com/concerts/40429762-avi-avital-at-melbourne-recital-centre?utm_medium=organic&utm_source=microformat",
-//     event_location_map: {
-//       image:
-//         "https://www.google.com/maps/vt/data=2ikm3IrGV_2-ngdl3aatgFd0wRGHiRMlLfTnQSvphlNMH3xazkPtQ4KUzD4sHbI4oOtbXkhHtjTVyEEbdIJVdAUkIpLLwqoI4DzZf5gzszkeaJt8MPE",
-//       link: "https://www.google.com/maps/place//data=!4m2!3m1!1s0x6ad642ae1a5e9b83:0xef21a57877623bbe?sa=X&hl=en",
-//       serpapi_link:
-//         "https://serpapi.com/search.json?data=%214m2%213m1%211s0x6ad642ae1a5e9b83%3A0xef21a57877623bbe&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Melbourne%2C+Vic+on+24%2F09%2F2022&type=place",
-//     },
 
-//     description:
-//       "Avi Avital and Giovanni Sollima at Melbourne Recital Centre at 2022-09-24",
-//     image:
-//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyv2akIbFVKQ436gGwt-NJuojN8gmv9G8yD5sss_HzTCT6JZlxJnPrtPgrUQ&s=10",
-//   },
-//   {
-//     title: "Main Stage @ Comedy Republic",
-//     date: {
-//       start_date: "Sep 24",
-//       when: "Sat, 8:30 – 10:00 PM",
-//     },
-//     address: ["Comedy Republic, 231 Bourke St", "Melbourne VIC, Australia"],
-//     link: "https://www.eventbrite.com.au/e/main-stage-comedy-with-harry-jun-prue-blake-more-tickets-368750993147",
-//     event_location_map: {
-//       image:
-//         "https://www.google.com/maps/vt/data=wIqWsp1-GGcNcCG9pcdLjM59HuZ4uRl54WfMXpwe5hDeZXlaD59rkC2ana1kq0chd-pQ_u-HXQac7-LihJazvkXFtLhVdLzSxLjisvn5-Vmptzt70D4",
-//       link: "https://www.google.com/maps/place//data=!4m2!3m1!1s0x6ad643f87996e99b:0xa4e5b67e456665b4?sa=X&hl=en",
-//       serpapi_link:
-//         "https://serpapi.com/search.json?data=%214m2%213m1%211s0x6ad643f87996e99b%3A0xa4e5b67e456665b4&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Melbourne%2C+Vic+on+24%2F09%2F2022&type=place",
-//     },
-//     description:
-//       "Prue Blake, Harry Jun, Lou Wall, Ben Searle, Rohan Ganju & More",
-//     image:
-//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSi57_2UOkSqO3jnfmsK5tqqliMkZ0f5KXnwT5KxSsNbw&s=10",
-//   },
-// ];
 
 function App() {
   const [address, setAddress] = useState("");
   const [startDate, setStartDate] = useState(new Date());
+  const [errorMessage, setErrorMessage] = useState("");
   const [coordinates, setCoordinates] = useState({
     lat: null,
     lng: null,
   });
   const [eventDisplay, setEventDisplay] = useState([])
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
@@ -90,8 +48,11 @@ function App() {
   let totalDaysInDays = Math.ceil(Difference_In_Days / (1000 * 3600 * 24));
 
   const searchClick = async () => {
-    if (coordinates.lat === null || coordinates.lng === null)
-      alert("Please select a place in the dropdown list");
+    setIsLoading(true);
+    if (coordinates.lat === null || coordinates.lng === null){
+      setIsLoading(false)
+      alert("Please select a place in the dropdown list");}
+    
     const response = await fetch("http://0.0.0.0:5006/api/event_information", {
       method: "POST",
       headers: {
@@ -103,18 +64,27 @@ function App() {
         place_latitude: coordinates.lat,
         place_longitude: coordinates.lng,
         selected_date_event_api: Moment(startDate).format("MMM Do YYYY"),
-        // selected_date_event_api: startDate,
         selected_days_weather_api: totalDaysInDays,
-      }),
-    })
+      }),})
+
     const body = await response.json();
-    setEventDisplay(JSON.parse(body).eventList)
+    
+    if (body.error1 || coordinates.lat === null) {
+      setIsLoading(false)
+      setErrorMessage(body.error1)
+    } else {
+      setErrorMessage("");
+      setIsLoading(false)
+      setEventDisplay(JSON.parse(body).eventList)
+    }
   };
 
   return (
     <div className="container">
+      <section>
       <img id="top-pic" src={backgrounImg} alt="" />
       <PlaceSearch
+      isLoading={isLoading}
         handleSelect={handleSelect}
         handleClick={handleClick}
         handleChange={handleChange}
@@ -122,8 +92,11 @@ function App() {
         address={address}
         newStartDate={setStartDate}
         startDate={startDate}
-      />
-     {eventDisplay ? eventDisplay.map((event, index) => (
+      /></section>
+      <section className="events_display">
+        {errorMessage !== "" && <div id="errorMessage"><h2>{errorMessage}</h2></div>}
+      {isLoading && <LoadingSpinner />}
+     {errorMessage === "" && eventDisplay.map((event, index) => (
           <EventItem
             key={index}
             title={event.title}
@@ -135,8 +108,9 @@ function App() {
             event_link={event.link}
             event_location_image={event.event_location_map && event.event_location_map.image}
             event_location_direction={event.event_location_map && event.event_location_map.link}
-          /> )): "No results found"};
-    </div>
+          /> ))}
+          </section>
+          </div>
   );
 }
 export default App;
