@@ -7,3 +7,4 @@ html_views = Blueprint("html_views", __name__)
 
 from api.views.index import *
 from api.views.events import *
+from api.views.tests import *

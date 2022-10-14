@@ -7,3 +7,4 @@ file.json
 *.drawio
 ~*
 node_modules/
+.vscode/
