@@ -64,8 +64,14 @@ class WeatherRequestHandler:
         """tests if the response is valid"""
         if apiResponse is None:
             raise ApiCallNonResposive
-        if apiResponse.get("forecast").get("forecastday") is None:
-            apiResponse = {"error": "Could not retrieve weather data."}
+        if apiResponse.get("forecast") is None or apiResponse.get("forecast").get("forecastday") is None:
+            raise ApiReturnNoneResults
+        if len(apiResponse.get("forecast").get("forecastday")) == 0:
+            raise ApiReturnNoneResults
+        if apiResponse.get("forecast").get("forecastday")[-1].get("day") is None:
+            raise ApiReturnNoneResults
+        if apiResponse.get("forecast").get("forecastday")[-1].get("day") == {}:
+            raise ApiReturnNoneResults
             
     def verify_weather_request_data(self, weatherRequestInformation):
         """call weather API and return weather information"""
