@@ -1,7 +1,7 @@
 .section {
   position: relative;
-    height: 50%;
-    width: 100%;
+  height: 50%;
+  width: 100%;
 }
 
 h1 {
@@ -11,24 +11,24 @@ h1 {
   text-shadow: 0 1px purple, 0 3px #130606;
 }
 header {
-  position:relative;
-  padding-top:23%;
+  position: relative;
+  padding-top: 23%;
 }
 
 #top-pic {
   position: absolute;
-    display: flex;
-    width: 100%; 
-    /* height: 50%;*/
-    object-fit: cover;
-    z-index: -1;
-    max-height: 800px;
-    filter: brightness(0.9);
+  display: flex;
+  width: 100%;
+  object-fit: cover;
+  z-index: -1;
+  max-height: 800px;
+  filter: brightness(0.9);
 }
 
 .search_buttons {
   display: flex;
   justify-content: space-around;
+  /* margin-bottom: 82px; */
 }
 .btn {
   background: green;
@@ -66,5 +66,5 @@ header {
 #errorMessage {
   margin: auto;
   position: relative;
-  margin-top:5%;
+  margin-top: 5%;
 }

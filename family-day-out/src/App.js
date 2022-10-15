@@ -5,8 +5,7 @@ import EventItem from "./components/EventItem";
 import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import Moment from "moment";
 import LoadingSpinner from "./components/LoadingSpinner";
-
-
+import Weather from "./components/Weather";
 
 function App() {
   const [address, setAddress] = useState("");
@@ -16,8 +15,9 @@ function App() {
     lat: null,
     lng: null,
   });
-  const [eventDisplay, setEventDisplay] = useState([])
+  const [eventDisplay, setEventDisplay] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
+  const [weatherDisplay, setWeatherDisplay] = useState([]);
 
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
@@ -49,68 +49,102 @@ function App() {
 
   const searchClick = async () => {
     setIsLoading(true);
-    if (coordinates.lat === null || coordinates.lng === null){
-      setIsLoading(false)
-      alert("Please select a place in the dropdown list");}
-    
-    const response = await fetch("http://0.0.0.0:5006/api/event_information", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        crossDomain: true,
-      },
-      body: JSON.stringify({
-        place_address: address,
-        place_latitude: coordinates.lat,
-        place_longitude: coordinates.lng,
-        selected_date_event_api: Moment(startDate).format("MMM Do YYYY"),
-        selected_days_weather_api: totalDaysInDays,
-      }),})
+    if (coordinates.lat === null || coordinates.lng === null) {
+      setIsLoading(false);
+      alert("Please select a place in the dropdown list");
+    }
+
+    const response = await fetch(
+      "http://0.0.0.0:5006/api/test/event_information",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          crossDomain: true,
+        },
+        body: JSON.stringify({
+          place_address: address,
+          place_latitude: coordinates.lat,
+          place_longitude: coordinates.lng,
+          selected_date_event_api: Moment(startDate).format("MMM Do YYYY"),
+          selected_days_weather_api: totalDaysInDays,
+        }),
+      }
+    );
 
     const body = await response.json();
-    
+
     if (body.error1 || coordinates.lat === null) {
-      setIsLoading(false)
-      setErrorMessage(body.error1)
+      setIsLoading(false);
+      setErrorMessage(body.error1);
     } else {
       setErrorMessage("");
-      setIsLoading(false)
-      setEventDisplay(JSON.parse(body).eventList)
+      setIsLoading(false);
+      setWeatherDisplay(JSON.parse(body).weatherInformation);
+      setEventDisplay(JSON.parse(body).eventList);
     }
   };
+  // const PREFIX = "//";
 
   return (
     <div className="container">
       <section>
-      <img id="top-pic" src={backgrounImg} alt="" />
-      <PlaceSearch
-      isLoading={isLoading}
-        handleSelect={handleSelect}
-        handleClick={handleClick}
-        handleChange={handleChange}
-        searchClick={searchClick}
-        address={address}
-        newStartDate={setStartDate}
-        startDate={startDate}
-      /></section>
+        <img id="top-pic" src={backgrounImg} alt="" />
+        <PlaceSearch
+          isLoading={isLoading}
+          handleSelect={handleSelect}
+          handleClick={handleClick}
+          handleChange={handleChange}
+          searchClick={searchClick}
+          address={address}
+          newStartDate={setStartDate}
+          startDate={startDate}
+        />
+        {errorMessage === "" && (
+          <Weather
+            maxtemp_c={weatherDisplay.maxtemp_c}
+            mintemp_c={weatherDisplay.mintemp_c}
+            daily_chance_of_rain={weatherDisplay.daily_chance_of_rain}
+            daily_chance_of_snow={weatherDisplay.daily_chance_of_snow}
+            // condition_text={weatherDisplay.condition.text}
+            // condition_icon={
+            //   weatherDisplay.condition.icon.startsWith(PREFIX) &&
+            //   weatherDisplay.condition.icon.slice(PREFIX.length)
+            // }
+            uv={weatherDisplay.uv}
+          />
+        )}
+      </section>
+
       <section className="events_display">
-        {errorMessage !== "" && <div id="errorMessage"><h2>{errorMessage}</h2></div>}
-      {isLoading && <LoadingSpinner />}
-     {errorMessage === "" && eventDisplay.map((event, index) => (
-          <EventItem
-            key={index}
-            title={event.title}
-            event_date={event.date.when}
-            event_address={event.address[0]}
-            event_address_sub={event.address[1]}
-            event_image={event.image}
-            description={event.description}
-            event_link={event.link}
-            event_location_image={event.event_location_map && event.event_location_map.image}
-            event_location_direction={event.event_location_map && event.event_location_map.link}
-          /> ))}
-          </section>
+        {errorMessage !== "" && (
+          <div id="errorMessage">
+            <h2>{errorMessage}</h2>
           </div>
+        )}
+        {isLoading && <LoadingSpinner />}
+
+        {errorMessage === "" &&
+          eventDisplay.map((event, index) => (
+            <EventItem
+              key={index}
+              title={event.title}
+              event_date={event.date.when}
+              event_address={event.address[0]}
+              event_address_sub={event.address[1]}
+              event_image={event.image}
+              description={event.description}
+              event_link={event.link}
+              event_location_image={
+                event.event_location_map && event.event_location_map.image
+              }
+              event_location_direction={
+                event.event_location_map && event.event_location_map.link
+              }
+            />
+          ))}
+      </section>
+    </div>
   );
 }
 export default App;
