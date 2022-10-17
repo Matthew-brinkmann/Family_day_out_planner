@@ -1,0 +1,32 @@
+.navbar {
+  display: flex;
+  /* justify-content: space-around;
+  position: relative; */
+  flex-direction: column;
+  z-index: 999;
+  height: 9vh;
+  width: 100%;
+  background-color: #c4def6;
+}
+
+.sticky-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+#weather_text {
+  padding-top: 1.5%;
+}
+#weather_heading {
+  text-align: center;
+  background-color: black;
+  color: antiquewhite;
+  width: fit-content;
+  margin: auto;
+}
+.weather_section {
+  display: flex;
+  justify-content: space-around;
+  position: relative;
+}
