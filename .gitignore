@@ -8,3 +8,4 @@ file.json
 ~*
 node_modules/
 .vscode/
+app.log
