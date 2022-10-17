@@ -3,10 +3,10 @@
   justify-content: space-around;
   position: relative;
   z-index: 999;
-  height: 65px;
+  height: 7vh;
   width: 100%;
   background-color: #c4def6;
-  /* margin-top: 82px; */
+  margin-top: 3.2%;
 }
 
 .sticky-nav {

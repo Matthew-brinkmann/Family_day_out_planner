@@ -11,6 +11,7 @@ function EventItem({
   event_link,
   event_location_image,
   event_location_direction,
+  event_rating,
 }) {
   return (
     <article className="event-item">
@@ -20,6 +21,7 @@ function EventItem({
       <div className="event-item_description">
         <h2>{title}</h2>
         <div>{description}</div>
+        <div>{event_rating}</div>
         <div>
           <a href={event_link} rel="noreferrer" target="_blank">
             To know more please click here

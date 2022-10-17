@@ -129,6 +129,7 @@ function App() {
             <EventItem
               key={index}
               title={event.title}
+              event_rating={event.venue.rating}
               event_date={event.date.when}
               event_address={event.address[0]}
               event_address_sub={event.address[1]}
