@@ -17,7 +17,9 @@ function App() {
   });
   const [eventDisplay, setEventDisplay] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [weatherDisplay, setWeatherDisplay] = useState([]);
+  const [weatherDisplay, setWeatherDisplay] = useState({});
+
+  console.log(weatherDisplay);
 
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
@@ -84,7 +86,6 @@ function App() {
       setEventDisplay(JSON.parse(body).eventList);
     }
   };
-  // const PREFIX = "//";
 
   return (
     <div className="container">
@@ -100,17 +101,23 @@ function App() {
           newStartDate={setStartDate}
           startDate={startDate}
         />
-        {errorMessage === "" && (
+
+        {Object.keys(weatherDisplay).length > 0 && (
           <Weather
             maxtemp_c={weatherDisplay.maxtemp_c}
             mintemp_c={weatherDisplay.mintemp_c}
             daily_chance_of_rain={weatherDisplay.daily_chance_of_rain}
             daily_chance_of_snow={weatherDisplay.daily_chance_of_snow}
-            // condition_text={weatherDisplay.condition.text}
-            // condition_icon={
-            //   weatherDisplay.condition.icon.startsWith(PREFIX) &&
-            //   weatherDisplay.condition.icon.slice(PREFIX.length)
-            // }
+            condition_text={
+              weatherDisplay.condition && weatherDisplay.condition.text
+                ? weatherDisplay.condition.text
+                : ""
+            }
+            condition_icon={
+              weatherDisplay.condition &&
+              weatherDisplay.condition.icon &&
+              weatherDisplay.condition.icon.slice("//")
+            }
             uv={weatherDisplay.uv}
           />
         )}
@@ -129,7 +136,9 @@ function App() {
             <EventItem
               key={index}
               title={event.title}
-              event_rating={event.venue.rating}
+              event_rating={
+                event.venue && event.venue.rating ? event.venue.rating : ""
+              }
               event_date={event.date.when}
               event_address={event.address[0]}
               event_address_sub={event.address[1]}

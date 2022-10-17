@@ -6,8 +6,8 @@ function Weather({
   mintemp_c,
   daily_chance_of_rain,
   daily_chance_of_snow,
-  // condition_text,
-  // condition_icon,
+  condition_text,
+  condition_icon,
   uv,
 }) {
   const [stickyClass, setStickyClass] = useState("");
@@ -25,24 +25,14 @@ function Weather({
   };
   return (
     <div className={`navbar ${stickyClass}`}>
-      <div>
-        <h2>{maxtemp_c}</h2>
-      </div>
-      <div>
-        <h2>{mintemp_c}</h2>
-      </div>
-      <div>{/* <h2>{condition_text}</h2> */}</div>
-      {/* <img src={condition_icon} alt="" /> */}
-      <div>
-        <h2>Daily chance of rain: {daily_chance_of_rain}</h2>
-      </div>
-      <div>
-        <h2>{daily_chance_of_snow}</h2>
-      </div>
+      <div id="weather_text">Max temp: {maxtemp_c}°C</div>
+      <div id="weather_text">Min temp: {mintemp_c}°C</div>
+      <div id="weather_text"> {condition_text}</div>
+      <img src={condition_icon} alt="" />
+      <div id="weather_text">Daily chance of rain: {daily_chance_of_rain}%</div>
+      <div id="weather_text">Daily chance of snow: {daily_chance_of_snow}%</div>
 
-      <div>
-        <h2>{uv}</h2>
-      </div>
+      <div id="weather_text">uv: {uv}</div>
     </div>
   );
 }

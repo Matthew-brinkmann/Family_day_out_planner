@@ -6,11 +6,14 @@
   height: 7vh;
   width: 100%;
   background-color: #c4def6;
-  margin-top: 3.2%;
 }
 
 .sticky-nav {
   position: fixed;
   top: 0;
   left: 0;
+}
+
+#weather_text {
+  padding-top: 1.5%;
 }

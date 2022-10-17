@@ -21,7 +21,7 @@ function EventItem({
       <div className="event-item_description">
         <h2>{title}</h2>
         <div>{description}</div>
-        <div>{event_rating}</div>
+        {event_rating && <div>Review rating: {event_rating}</div>}
         <div>
           <a href={event_link} rel="noreferrer" target="_blank">
             To know more please click here
