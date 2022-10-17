@@ -9,3 +9,4 @@ file.json
 node_modules/
 .vscode/
 app.log
+test_app.log

@@ -2,8 +2,8 @@
 """
 module to handle all custom exceptions.
 """
-from models.system_logging import SystemLogging
 import inspect
+from models.system_logging import SystemLogging
 
 
 class ApiCallNonResposive(Exception):
@@ -34,7 +34,7 @@ class ReturnDtoEventListNotSet(Exception):
         """init for exception"""
         self.message = message
         self.typeSetTo = typeSetTo
-        self.methodRaisingException = inspect.stack()[2][4][0]
+        self.methodRaisingException = self.clean_string(inspect.stack()[2][4][0])
         SystemLogging.log_warning_error(self.methodRaisingException,
                                         self.message,
                                         self.typeSetTo)
@@ -55,7 +55,7 @@ class ServerEnvironVariablesNotSet(Exception):
         """init for exception"""
         self.message = message
         self.typeSetTo = typeSetTo
-        self.methodRaisingException = inspect.stack()[2][4][0]
+        self.methodRaisingException = self.clean_string(inspect.stack()[2][4][0])
         SystemLogging.log_warning_error(self.methodRaisingException,
                                         self.message,
                                         self.typeSetTo)
@@ -73,7 +73,7 @@ class ApiReturnNoneResults(Exception):
                  message="No events results for this query"):
         """init for exception"""
         self.message = message
-        self.methodRaisingException = inspect.stack()[2][4][0]
+        self.methodRaisingException = self.clean_string(inspect.stack()[2][4][0])
         SystemLogging.log_warning_error(self.methodRaisingException,
                                         self.message)
         super().__init__(self.message)
@@ -90,7 +90,7 @@ class TestRequestDataIncorrectFormat(Exception):
                  message="request Data does not contain correct information"):
         """init for exception"""
         self.message = message
-        self.methodRaisingException = inspect.stack()[2][4][0]
+        self.methodRaisingException = self.clean_string(inspect.stack()[2][4][0])
         SystemLogging.log_warning_error(self.methodRaisingException,
                                         self.message)
         super().__init__(self.message)

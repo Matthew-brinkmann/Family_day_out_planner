@@ -37,7 +37,7 @@ All files, classes and functions can be tested with unit tests.
 
 **Interactive mode:** 
 ```
-python3 -m unittest discover tests
+RUN_UNITTEST=True python3 -m unittest discover tests
 ```
 
 
