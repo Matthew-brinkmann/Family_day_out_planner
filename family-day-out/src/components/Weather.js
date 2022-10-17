@@ -20,19 +20,28 @@ function Weather({
   const stickNavbar = () => {
     if (window !== undefined) {
       let windowHeight = window.scrollY;
-      windowHeight > 580 ? setStickyClass("sticky-nav") : setStickyClass("");
+      windowHeight >= window.innerHeight * 0.743
+        ? setStickyClass("sticky-nav")
+        : setStickyClass("");
     }
   };
   return (
     <div className={`navbar ${stickyClass}`}>
-      <div id="weather_text">Max temp: {maxtemp_c}°C</div>
-      <div id="weather_text">Min temp: {mintemp_c}°C</div>
-      <div id="weather_text"> {condition_text}</div>
-      <img src={condition_icon} alt="" />
-      <div id="weather_text">Daily chance of rain: {daily_chance_of_rain}%</div>
-      <div id="weather_text">Daily chance of snow: {daily_chance_of_snow}%</div>
+      <div className="weather_section">
+        <div id="weather_text">Max temp: {maxtemp_c}°C</div>
+        <div id="weather_text">Min temp: {mintemp_c}°C</div>
+        <div id="weather_text"> {condition_text}</div>
+        <img src={condition_icon} alt="" />
+        <div id="weather_text">
+          Daily chance of rain: {daily_chance_of_rain}%
+        </div>
+        <div id="weather_text">
+          Daily chance of snow: {daily_chance_of_snow}%
+        </div>
 
-      <div id="weather_text">uv: {uv}</div>
+        <div id="weather_text">uv: {uv}</div>
+      </div>
+      <div id="weather_heading">Local temperature</div>
     </div>
   );
 }
