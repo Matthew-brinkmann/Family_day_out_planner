@@ -31,6 +31,7 @@ EVENT_API_KEY=<API KEY>
 WEATHER_API_KEY=<API KEY>
 MYSQL_ROOT_USER=<SQL USERNAME>
 MYSQL_ROOT_PASSWORD=<SQL PASSWORD>
+SLACK_WEBHOOK=<WEBHOOK URL PROVIDED BY SLACK>
 ```
 ## 🛂 Testing:
 All files, classes and functions can be tested with unit tests.
