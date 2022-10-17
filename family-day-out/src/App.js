@@ -56,23 +56,20 @@ function App() {
       alert("Please select a place in the dropdown list");
     }
 
-    const response = await fetch(
-      "http://0.0.0.0:5006/api/test/event_information",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          crossDomain: true,
-        },
-        body: JSON.stringify({
-          place_address: address,
-          place_latitude: coordinates.lat,
-          place_longitude: coordinates.lng,
-          selected_date_event_api: Moment(startDate).format("MMM Do YYYY"),
-          selected_days_weather_api: totalDaysInDays,
-        }),
-      }
-    );
+    const response = await fetch("http://0.0.0.0:5006/api/event_information", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        crossDomain: true,
+      },
+      body: JSON.stringify({
+        place_address: address,
+        place_latitude: coordinates.lat,
+        place_longitude: coordinates.lng,
+        selected_date_event_api: Moment(startDate).format("MMM Do YYYY"),
+        selected_days_weather_api: totalDaysInDays,
+      }),
+    });
 
     const body = await response.json();
 
@@ -102,25 +99,26 @@ function App() {
           startDate={startDate}
         />
 
-        {Object.keys(weatherDisplay).length > 0 && (
-          <Weather
-            maxtemp_c={weatherDisplay.maxtemp_c}
-            mintemp_c={weatherDisplay.mintemp_c}
-            daily_chance_of_rain={weatherDisplay.daily_chance_of_rain}
-            daily_chance_of_snow={weatherDisplay.daily_chance_of_snow}
-            condition_text={
-              weatherDisplay.condition && weatherDisplay.condition.text
-                ? weatherDisplay.condition.text
-                : ""
-            }
-            condition_icon={
-              weatherDisplay.condition &&
-              weatherDisplay.condition.icon &&
-              weatherDisplay.condition.icon.slice("//")
-            }
-            uv={weatherDisplay.uv}
-          />
-        )}
+        {errorMessage !== "" ||
+          (Object.keys(weatherDisplay).length > 0 && (
+            <Weather
+              maxtemp_c={weatherDisplay.maxtemp_c}
+              mintemp_c={weatherDisplay.mintemp_c}
+              daily_chance_of_rain={weatherDisplay.daily_chance_of_rain}
+              daily_chance_of_snow={weatherDisplay.daily_chance_of_snow}
+              condition_text={
+                weatherDisplay.condition && weatherDisplay.condition.text
+                  ? weatherDisplay.condition.text
+                  : ""
+              }
+              condition_icon={
+                weatherDisplay.condition &&
+                weatherDisplay.condition.icon &&
+                weatherDisplay.condition.icon.slice("//")
+              }
+              uv={weatherDisplay.uv}
+            />
+          ))}
       </section>
 
       <section className="events_display">
