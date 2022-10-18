@@ -1,7 +1,6 @@
 .navbar {
   display: flex;
-  /* justify-content: space-around;
-  position: relative; */
+  position: absolute;
   flex-direction: column;
   z-index: 999;
   height: 9vh;
