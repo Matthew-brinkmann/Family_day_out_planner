@@ -19,8 +19,6 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [weatherDisplay, setWeatherDisplay] = useState({});
 
-  console.log(weatherDisplay);
-
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
     const latLng = await getLatLng(results[0]);
@@ -28,7 +26,6 @@ function App() {
     setCoordinates(latLng);
   };
 
-  //click on suggestion to show address
   const handleClick = async (suggestion) => {
     const results = await geocodeByAddress(suggestion.description);
     const latLng = await getLatLng(results[0]);
@@ -44,7 +41,7 @@ function App() {
       lng: null,
     });
   };
-  //selected_days_weather_api
+
   const now = new Date();
   let Difference_In_Days = startDate.getTime() - now.getTime();
   let totalDaysInDays = Math.ceil(Difference_In_Days / (1000 * 3600 * 24));
@@ -56,23 +53,20 @@ function App() {
       alert("Please select a place in the dropdown list");
     }
 
-    const response = await fetch(
-      "http://0.0.0.0:5006/api/test/event_information",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          crossDomain: true,
-        },
-        body: JSON.stringify({
-          place_address: address,
-          place_latitude: coordinates.lat,
-          place_longitude: coordinates.lng,
-          selected_date_event_api: Moment(startDate).format("MMM Do YYYY"),
-          selected_days_weather_api: totalDaysInDays,
-        }),
-      }
-    );
+    const response = await fetch("http://0.0.0.0:5006/api/event_information", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        crossDomain: true,
+      },
+      body: JSON.stringify({
+        place_address: address,
+        place_latitude: coordinates.lat,
+        place_longitude: coordinates.lng,
+        selected_date_event_api: Moment(startDate).format("MMM Do YYYY"),
+        selected_days_weather_api: totalDaysInDays,
+      }),
+    });
 
     const body = await response.json();
 
@@ -101,9 +95,11 @@ function App() {
           newStartDate={setStartDate}
           startDate={startDate}
         />
-
+        {weatherDisplay.error && (
+          <div id="weather_error"> {weatherDisplay.error}</div>
+        )}
         {errorMessage !== "" ||
-          (Object.keys(weatherDisplay).length > 0 && (
+          (weatherDisplay.maxtemp_c && (
             <Weather
               maxtemp_c={weatherDisplay.maxtemp_c}
               mintemp_c={weatherDisplay.mintemp_c}
