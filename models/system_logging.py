@@ -11,14 +11,20 @@ class SystemLogging:
     def log_warning_error(cls, callingMethod, message="error message not passed", *vars):
         """logs an error to the log file."""
         cls.setup_log_config()
-        cls.clean_calling_method(callingMethod)
-        logging.critical(cls.generate_alert_message(callingMethod, message, vars))
+        cleanMethodName = cls.clean_calling_method(callingMethod)
+        logging.critical(cls.generate_alert_message(cleanMethodName, message, vars))
         if os.getenv('RUN_UNITTEST', False) is False:
             cls.verify_slack_message_sent(SlackChannelHandler.
                                             send_message_to_error_slack(cls.
-                                                generate_alert_message(callingMethod,
+                                                generate_alert_message(cleanMethodName,
                                                                        message,
                                                                        vars)))
+
+    @classmethod
+    def print_to_logfile_for_debug(cls, message="message Passed", *vars):
+        """prints a line to the log files for debug purposes."""
+        cls.setup_log_config()
+        logging.debug(cls.generate_alert_message("DEBUG_CODE", message, vars))
 
     @classmethod
     def setup_log_config(cls):
