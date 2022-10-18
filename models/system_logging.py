@@ -7,22 +7,26 @@ from models.slack_handler import SlackChannelHandler
 
 class SystemLogging:
     """handles the system logging"""
-    if os.getenv('RUN_UNITTEST') == "True":
-        logging.basicConfig(filename='test_app.log', format='%(asctime)s - %(message)s')
-    else:
-        logging.basicConfig(filename='app.log', format='%(asctime)s - %(message)s')
-
     @classmethod
     def log_warning_error(cls, callingMethod, message="error message not passed", *vars):
         """logs an error to the log file."""
-        cleanCallingMethod = cls.clean_string(callingMethod)
-        logging.critical(cls.generate_alert_message(cleanCallingMethod, message, vars))
-        if os.getenv('RUN_UNITTEST') != "True":
+        cls.setup_log_config()
+        cls.clean_calling_method(callingMethod)
+        logging.critical(cls.generate_alert_message(callingMethod, message, vars))
+        if os.getenv('RUN_UNITTEST', False) is False:
             cls.verify_slack_message_sent(SlackChannelHandler.
                                             send_message_to_error_slack(cls.
-                                                generate_alert_message(cleanCallingMethod,
+                                                generate_alert_message(callingMethod,
                                                                        message,
                                                                        vars)))
+
+    @classmethod
+    def setup_log_config(cls):
+        """sets up the logging information."""
+        if os.getenv('RUN_UNITTEST', False) is False:
+            logging.basicConfig(filename='app.log', format='%(asctime)s - %(message)s')
+        else:
+            logging.basicConfig(filename='test_app.log', format='%(asctime)s - %(message)s')
 
     @classmethod
     def generate_alert_message(cls, callingMethod, message, *vars):
@@ -41,6 +45,6 @@ class SystemLogging:
                                                         "Unknown Issue with Slack Webhook and API. Returned error code: " + str(SlackReturn)))
 
     @classmethod
-    def clean_string(cls, stringToClean):
+    def clean_calling_method(cls, stringToClean) -> string:
         """removes whitespace and newlines from a string"""
         return (stringToClean.translate( { ord(c) :None for c in string.whitespace } ))
