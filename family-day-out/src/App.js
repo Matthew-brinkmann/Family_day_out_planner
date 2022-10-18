@@ -95,9 +95,11 @@ function App() {
           newStartDate={setStartDate}
           startDate={startDate}
         />
-
+        {weatherDisplay.error && (
+          <div id="weather_error"> {weatherDisplay.error}</div>
+        )}
         {errorMessage !== "" ||
-          (Object.keys(weatherDisplay).length > 0 && (
+          (weatherDisplay.maxtemp_c && (
             <Weather
               maxtemp_c={weatherDisplay.maxtemp_c}
               mintemp_c={weatherDisplay.mintemp_c}
