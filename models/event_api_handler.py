@@ -18,7 +18,7 @@ class EventRequestHandler:
 
     def __init__(self, eventRequestInformation):
         self.create_query_url(eventRequestInformation)
-        self.create_query_params()
+        self.create_query_params(eventRequestInformation)
         
     def get_list_of_events_from_query(self):
         """calls API and returns event List"""
@@ -40,7 +40,7 @@ class EventRequestHandler:
                 + " on "\
                 + eventRequestInformation["selected_date_event_api"]
 
-    def create_query_params(self):
+    def create_query_params(self, eventRequestInformation):
         '''cerates the query parameters'''
         if not os.environ.get('EVENT_API_KEY'):
             raise ServerEnvironVariablesNotSet("EVENT_API_KEY")
@@ -48,6 +48,7 @@ class EventRequestHandler:
         self.params = {
             "engine": "google_events",
             "q": self.queryUrl,
+            "location_requested": eventRequestInformation["place_address"],
             "api_key": os.environ.get('EVENT_API_KEY')}
 
     @staticmethod
@@ -55,5 +56,7 @@ class EventRequestHandler:
         """tests if the response is valid"""
         if apiResponse is None:
             raise ApiCallNonResposive
-        if apiResponse.get("events_results") is None:
+        if apiResponse == {}:
+            raise ApiReturnNoneResults
+        if apiResponse.get("events_results") is None or apiResponse.get("events_results") == {}:
             raise ApiReturnNoneResults
