@@ -2,6 +2,8 @@
 """
 module to handle all custom exceptions.
 """
+import inspect
+from models.system_logging import SystemLogging
 
 
 class ApiCallNonResposive(Exception):
@@ -11,8 +13,10 @@ class ApiCallNonResposive(Exception):
     def __init__(self,
                  message="API call did not return a 200 reponse"):
         """init for exception"""
-        
         self.message = message
+        self.methodRaisingThisException = inspect.stack()[2][4][0]
+        SystemLogging.log_warning_error(self.methodRaisingThisException,
+                                        self.message)
         super().__init__(self.message)
 
     def __str__(self):
@@ -21,7 +25,7 @@ class ApiCallNonResposive(Exception):
 
 
 class ReturnDtoEventListNotSet(Exception):
-    """Exception raised when an API call returns non 200
+    """Exception raised event list set incorrectly
     """
 
     def __init__(self,
@@ -30,6 +34,10 @@ class ReturnDtoEventListNotSet(Exception):
         """init for exception"""
         self.message = message
         self.typeSetTo = typeSetTo
+        self.methodRaisingThisException = inspect.stack()[2][4][0]
+        SystemLogging.log_warning_error(self.methodRaisingThisException,
+                                        self.message,
+                                        self.typeSetTo)
         super().__init__(self.message)
 
     def __str__(self):
@@ -47,6 +55,10 @@ class ServerEnvironVariablesNotSet(Exception):
         """init for exception"""
         self.message = message
         self.typeSetTo = typeSetTo
+        self.methodRaisingThisException = inspect.stack()[2][4][0]
+        SystemLogging.log_warning_error(self.methodRaisingThisException,
+                                        self.message,
+                                        self.typeSetTo)
         super().__init__(self.message)
 
     def __str__(self):
@@ -61,6 +73,9 @@ class ApiReturnNoneResults(Exception):
                  message="No events results for this query"):
         """init for exception"""
         self.message = message
+        self.methodRaisingThisException = inspect.stack()[2][4][0]
+        SystemLogging.log_warning_error(self.methodRaisingThisException,
+                                        self.message)
         super().__init__(self.message)
 
     def __str__(self):
@@ -75,6 +90,9 @@ class TestRequestDataIncorrectFormat(Exception):
                  message="request Data does not contain correct information"):
         """init for exception"""
         self.message = message
+        self.methodRaisingThisException = inspect.stack()[2][4][0]
+        SystemLogging.log_warning_error(self.methodRaisingThisException,
+                                        self.message)
         super().__init__(self.message)
 
     def __str__(self):

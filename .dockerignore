@@ -2,3 +2,5 @@ __pycache__/
 *~
 file.json
 .coverage
+app.log
+test_app.log
