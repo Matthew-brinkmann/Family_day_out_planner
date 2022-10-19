@@ -1,6 +1,5 @@
 import os
 import requests
-from models.exceptions import *
 
 
 class SlackChannelHandler():

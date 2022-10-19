@@ -14,8 +14,8 @@ class ApiCallNonResposive(Exception):
                  message="API call did not return a 200 reponse"):
         """init for exception"""
         self.message = message
-        self.methodRaisingException = inspect.stack()[2][4][0]
-        SystemLogging.log_warning_error(self.methodRaisingException,
+        self.methodRaisingThisException = inspect.stack()[2][4][0]
+        SystemLogging.log_warning_error(self.methodRaisingThisException,
                                         self.message)
         super().__init__(self.message)
 
@@ -34,8 +34,8 @@ class ReturnDtoEventListNotSet(Exception):
         """init for exception"""
         self.message = message
         self.typeSetTo = typeSetTo
-        self.methodRaisingException = inspect.stack()[2][4][0]
-        SystemLogging.log_warning_error(self.methodRaisingException,
+        self.methodRaisingThisException = inspect.stack()[2][4][0]
+        SystemLogging.log_warning_error(self.methodRaisingThisException,
                                         self.message,
                                         self.typeSetTo)
         super().__init__(self.message)
@@ -55,8 +55,8 @@ class ServerEnvironVariablesNotSet(Exception):
         """init for exception"""
         self.message = message
         self.typeSetTo = typeSetTo
-        self.methodRaisingException = inspect.stack()[2][4][0]
-        SystemLogging.log_warning_error(self.methodRaisingException,
+        self.methodRaisingThisException = inspect.stack()[2][4][0]
+        SystemLogging.log_warning_error(self.methodRaisingThisException,
                                         self.message,
                                         self.typeSetTo)
         super().__init__(self.message)
@@ -73,8 +73,8 @@ class ApiReturnNoneResults(Exception):
                  message="No events results for this query"):
         """init for exception"""
         self.message = message
-        self.methodRaisingException = inspect.stack()[2][4][0]
-        SystemLogging.log_warning_error(self.methodRaisingException,
+        self.methodRaisingThisException = inspect.stack()[2][4][0]
+        SystemLogging.log_warning_error(self.methodRaisingThisException,
                                         self.message)
         super().__init__(self.message)
 
@@ -90,8 +90,8 @@ class TestRequestDataIncorrectFormat(Exception):
                  message="request Data does not contain correct information"):
         """init for exception"""
         self.message = message
-        self.methodRaisingException = inspect.stack()[2][4][0]
-        SystemLogging.log_warning_error(self.methodRaisingException,
+        self.methodRaisingThisException = inspect.stack()[2][4][0]
+        SystemLogging.log_warning_error(self.methodRaisingThisException,
                                         self.message)
         super().__init__(self.message)
 

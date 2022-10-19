@@ -1,7 +1,6 @@
 import logging
 import os
 import string
-from models.exceptions import *
 from models.slack_handler import SlackChannelHandler
 
 
@@ -24,7 +23,7 @@ class SystemLogging:
     def print_to_logfile_for_debug(cls, message="message Passed", *vars):
         """prints a line to the log files for debug purposes."""
         cls.setup_log_config()
-        logging.debug(cls.generate_alert_message("DEBUG_CODE", message, vars))
+        logging.warning(cls.generate_alert_message("DEBUG_CODE", message, vars))
 
     @classmethod
     def setup_log_config(cls):
@@ -38,6 +37,8 @@ class SystemLogging:
     def generate_alert_message(cls, callingMethod, message, *vars):
         """generates the error messaged that gets logged"""
         varsAsAString = "\n\t".join(map(str, vars))
+        print(message)
+        print(vars)
         return(f"method: {callingMethod} raised error: {message}:\n\t{varsAsAString}")
 
     @classmethod
