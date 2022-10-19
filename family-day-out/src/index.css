@@ -73,7 +73,7 @@ header {
   text-align: center;
   font-weight: bold;
   padding-top: 2%;
-  position: relative;
+  position: absolute;
   height: 5vh;
   width: 100%;
   background-color: #c4def6;
