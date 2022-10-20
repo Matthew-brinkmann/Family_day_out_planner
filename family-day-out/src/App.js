@@ -53,7 +53,7 @@ function App() {
       alert("Please select a place in the dropdown list");
     }
 
-    const response = await fetch("http://0.0.0.0:5006/api/event_information", {
+    const response = await fetch("http://0.0.0.0:5006/api/events", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

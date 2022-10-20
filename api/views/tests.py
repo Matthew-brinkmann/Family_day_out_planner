@@ -9,7 +9,7 @@ from tests.test_data.test_api_return import *
 
 
 @swag_from("documentation/test_event_info.yml", methods=['POST'])
-@app_views.route('test/event_information', methods=['POST'], strict_slashes=False)
+@app_views.route('test/events', methods=['POST'], strict_slashes=False)
 def test_events():
     """ returns the test information """
     try:
