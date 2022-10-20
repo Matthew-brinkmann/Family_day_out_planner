@@ -43,10 +43,13 @@ RUN_UNITTEST=True python3 -m unittest discover tests
 
 
 ## 📁 File descriptions:
-- models: contains all Python Scripting
-- tests: contains unit tests for python scripts
-- templates: contains front end files
+- api: contains the flask files, views and blueprints
 - docker: contains all files required for docker configurations
+- family-day-out: contains front end react application files
+- models: contains all Python Scripting
+- presentation: Contains the presentation for the project.
+- tests: contains unit tests for python scripts
+
 
 ## 🐛 Bugs
 No known bugs at this time.
