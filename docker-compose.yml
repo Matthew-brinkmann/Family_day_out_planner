@@ -15,7 +15,7 @@ services:
       - .env
     environment:
       - FLASK_DEBUG=True
-      - MYSQL_DB_URL=mysql+pymysql://${MYSQL_ROOT_USER}:"${MYSQL_ROOT_PASSWORD}"@mysql:3306/db_family_day_out_planner
+      - MYSQL_DB_URL=mysql+pymysql://${MYSQL_ROOT_USER}:${MYSQL_ROOT_PASSWORD}@mysql:3306/db_family_day_out_planner
   
   mysql:
     image: mysql:8.0.30

@@ -3,7 +3,7 @@
 Module of table Users search history
 """
 from api.app import db
-from models.users import *
+from models.db_models.users import *
 from sqlalchemy import Column, String, ForeignKey
 
 

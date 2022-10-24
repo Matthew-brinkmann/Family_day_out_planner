@@ -3,7 +3,8 @@
 from api.views import auth_views
 from flask import Flask, Blueprint, render_template, jsonify, request, redirect, url_for
 from models.token import TokenHelper
-from models.users import User
+from models.user_interface import UserInterface
+from models.db_models.users import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from api.app import db
 from flask_login import login_user, login_required, logout_user
