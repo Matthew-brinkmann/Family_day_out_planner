@@ -18,7 +18,6 @@ class SystemRequestHandler:
         """
         will call the modules to get the weather information.
         """
-        # created an object to hold all the information we require here, instead of storing them in seperate variables.
         returnEventDTO = ReturnDataTransferObject()
         eventHandler = EventRequestHandler(eventRequestInformation)
         weatherHandler = WeatherRequestHandler(eventRequestInformation)
