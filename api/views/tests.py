@@ -20,7 +20,7 @@ def test_events():
 
 @swag_from("documentation/login_success.yml", methods=['POST'])
 @app_views.route('test/login_success', methods=['POST'], strict_slashes=False)
-def test_events():
+def test_login_success():
     """ returns the test information """
     request_data=request.get_json()
     test_return_dto = {
@@ -33,7 +33,7 @@ def test_events():
 
 @swag_from("documentation/login_fail.yml", methods=['POST'])
 @app_views.route('test/login_fail', methods=['POST'], strict_slashes=False)
-def test_events():
+def test_login_fail():
     """ returns the test information """
     test_return_dto = {
         "message": "user/password not correct, please check details and try again"
