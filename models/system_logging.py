@@ -37,8 +37,6 @@ class SystemLogging:
     def generate_alert_message(cls, callingMethod, message, *vars):
         """generates the error messaged that gets logged"""
         varsAsAString = "\n\t".join(map(str, vars))
-        print(message)
-        print(vars)
         return(f"method: {callingMethod} raised error: {message}:\n\t{varsAsAString}")
 
     @classmethod
