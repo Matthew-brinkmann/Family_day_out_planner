@@ -5,8 +5,9 @@ from api.views.documentation.swagger_setup import *
 from models.exceptions import *
 from models.system_request_handler import SystemRequestHandler
 import os
-from flask import Flask, Blueprint, jsonify, request
+from flask import Flask, Blueprint, jsonify, request, make_response
 from flasgger import swag_from
+from models.token import *
 
 
 exceptionsWithDescription = (ReturnDtoEventListNotSet, ServerEnvironVariablesNotSet)
@@ -16,6 +17,7 @@ exceptionsWithDescription = (ReturnDtoEventListNotSet, ServerEnvironVariablesNot
 @app_views.route('/event_information', methods=['POST'], strict_slashes=False)
 def events():
     """ retrieves number of objects by type """
+    verify_token(request)
     fullReturnInformation = {}
     try:
         fullReturnInformation = SystemRequestHandler.get_all_return_information(
@@ -28,7 +30,7 @@ def events():
         fullReturnInformation["error2"] = str(error)
 
     return jsonify(fullReturnInformation)
-
+        
 
 if __name__ == "__main__":
     pass

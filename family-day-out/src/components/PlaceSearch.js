@@ -32,6 +32,11 @@ const PlaceSearch = ({
             <button onClick={searchClick} disabled={isLoading} className="btn">
               Search
             </button>
+            <a href="./auth/login">
+                <button disabled={isLoading} className="btn">
+                Login
+                </button>
+            </a>
             <div className="autocomplete-dropdown-container">
               {loading && <div>Loading...</div>}
               {suggestions.map((suggestion, index) => {

@@ -2,15 +2,24 @@
 """module for flask app"""
 from api.views import app_views
 from api.views import html_views
+from api.views import auth_views
 from api.views.documentation.swagger_setup import *
 import os
 from flask import Flask, Blueprint, jsonify
 from flask_cors import CORS
 from flasgger import LazyJSONEncoder, Swagger
+from flask_sqlalchemy import SQLAlchemy
 
+db = SQLAlchemy()
 app = Flask(__name__, static_folder='../family-day-out/build/static', template_folder='../family-day-out/build')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("MYSQL_DB_URL")
+app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
+db.init_app(app)
+
 app.register_blueprint(app_views)
 app.register_blueprint(html_views)
+app.register_blueprint(auth_views)
+
 cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
 corsInstance = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
