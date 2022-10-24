@@ -16,7 +16,7 @@ class TokenHelper:
         """
         try:
             payload = {
-                'exp': datetime.datetime.utcnow() + datetime.timedelta(minutes=30),
+                'exp': datetime.datetime.utcnow() + datetime.timedelta(days=1),
                 'iat': datetime.datetime.utcnow(),
                 'usr_id': user_id
             }
@@ -42,3 +42,5 @@ class TokenHelper:
             return 'Session expired. Please log in again.'
         except jwt.InvalidTokenError:
             return 'Invalid token. Please log in again.'
+
+    # TODO: add in refresh token methods to keep sessions alive.

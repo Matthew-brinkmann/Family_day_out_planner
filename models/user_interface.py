@@ -16,6 +16,10 @@ class UserInterface:
         """
         returns list of all previous serches        
         """
+        # query DB, get search hisotry filterby(user_id=userID)
+        # build in a check that we don't send back any expired searches.
+        # 25 i search for events on 26th., I log back in on 29th, i shouldnt see 26th events.
+        # if we find old searchs (for events before today), delete from DB.
         pass
     
     @staticmethod
@@ -23,8 +27,6 @@ class UserInterface:
         """
         add new search history to DB        
         """
-        SystemLogging.print_to_logfile_for_debug("inside add search history ", searchHistoryRequestJson)
-        SystemLogging.print_to_logfile_for_debug("userID is ", userId)
         if UserInterface.retrieve_user_instance_from_userid(userId) is None:
             return False
         searchHistory = UserSearchHistory(user_id = userId,

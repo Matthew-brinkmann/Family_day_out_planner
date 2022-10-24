@@ -47,13 +47,9 @@ class AuthorizationHandler:
     def add_to_user_search_history(apiRequest):
         """verify token"""
         auth_token = apiRequest.headers.get('Authorization')
-        SystemLogging.print_to_logfile_for_debug("auth_token = ", auth_token)
-        SystemLogging.print_to_logfile_for_debug("request = ", apiRequest)
-        SystemLogging.print_to_logfile_for_debug("request Headers = ", apiRequest.headers)
         if auth_token:
             UserInterface.add_search_history_to_user_by_id(TokenHelper.get_user_id_from_auth_token(auth_token),
                                                            apiRequest.get_json())
-        SystemLogging.print_to_logfile_for_debug("should get here")
         return
 
     @staticmethod

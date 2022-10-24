@@ -17,7 +17,6 @@ exceptionsWithDescription = (ReturnDtoEventListNotSet, ServerEnvironVariablesNot
 @app_views.route('/event_information', methods=['POST'], strict_slashes=False)
 def events():
     """ retrieves number of objects by type """
-    verify_token(request)
     fullReturnInformation = {}
     try:
         fullReturnInformation = SystemRequestHandler.get_all_return_information(
@@ -30,7 +29,7 @@ def events():
         fullReturnInformation["error2"] = str(error)
 
     return jsonify(fullReturnInformation)
-        
+
 
 if __name__ == "__main__":
     pass
