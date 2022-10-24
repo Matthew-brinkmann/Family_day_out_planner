@@ -1,7 +1,6 @@
 tags:
-  - name: Get Events
-get:
-  description: None
+  - name: Get a list of events based on criteria
+description: Will need to post information matching the criteria to get a result
 definitions:
   200_response:
     type: object

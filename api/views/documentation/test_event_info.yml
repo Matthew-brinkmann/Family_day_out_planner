@@ -1,7 +1,6 @@
 tags:
-  - name: Test Get Events
-get:
-  description: this returns the same data each time for the purpose of testing front end.
+  - name: get a list of events for testing purposes.
+description: this returns the same data each time for the purpose of testing front end.
 definitions:
   200_response:
     type: object

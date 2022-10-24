@@ -13,7 +13,7 @@ exceptionsWithDescription = (ReturnDtoEventListNotSet, ServerEnvironVariablesNot
 
 
 @swag_from("documentation/event_info.yml", methods=['POST'])
-@app_views.route('/event_information', methods=['POST'], strict_slashes=False)
+@app_views.route('/events', methods=['POST'], strict_slashes=False)
 def events():
     """ retrieves number of objects by type """
     fullReturnInformation = {}
