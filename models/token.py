@@ -57,8 +57,8 @@ def verify_token(request):
         if check_userId_exist(userId):
             searchHistory = UserSearchHistory(user_id=userId,
                                               search_history=request.get_json())
-            db.session.add(searchHistory)
-            db.session.commit()
+            app.db.session.add(searchHistory)
+            app.db.session.commit()
     return
 
 
