@@ -6,6 +6,11 @@ import { geocodeByAddress, getLatLng } from "react-places-autocomplete";
 import Moment from "moment";
 import LoadingSpinner from "./components/LoadingSpinner";
 import Weather from "./components/Weather";
+// import Login from "./components/Login";
+// import useToken from "./components/useToken";
+import LoginBar from "./components/LoginBar";
+import AuthForm from "./components/AuthForm";
+import "./loginstyles.css";
 
 function App() {
   const [address, setAddress] = useState("");
@@ -18,6 +23,15 @@ function App() {
   const [eventDisplay, setEventDisplay] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [weatherDisplay, setWeatherDisplay] = useState({});
+  const [isShowLogin, setIsShowLogin] = useState(false);
+
+  const handleLoginClick = () => {
+    setIsShowLogin((isShowLogin) => !isShowLogin);
+  };
+  // const { token, setToken } = useToken();
+  // if (!token) {
+  //   return <Login setToken={setToken} />;
+  // }
 
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
@@ -83,6 +97,8 @@ function App() {
 
   return (
     <div className="container">
+      <LoginBar handleLoginClick={handleLoginClick} />
+      <AuthForm isShowLogin={isShowLogin} />
       <section>
         <img id="top-pic" src={backgrounImg} alt="" />
         <PlaceSearch

@@ -3,14 +3,14 @@
   height: 50%;
   width: 100%;
 }
-h1 {
+header h1 {
   text-align: center;
   font-size: 4vw;
   color: snow;
   text-shadow: 0 5px purple, 0 3px #130606;
 }
 header {
-  position: relative;
+  /* position: relative; */
   padding-top: 23%;
 }
 
