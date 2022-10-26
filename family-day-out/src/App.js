@@ -24,14 +24,11 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [weatherDisplay, setWeatherDisplay] = useState({});
   const [isShowLogin, setIsShowLogin] = useState(false);
+  const [token, setToken] = useState(null);
 
   const handleLoginClick = () => {
     setIsShowLogin((isShowLogin) => !isShowLogin);
   };
-  // const { token, setToken } = useToken();
-  // if (!token) {
-  //   return <Login setToken={setToken} />;
-  // }
 
   const handleSelect = async (value) => {
     const results = await geocodeByAddress(value);
@@ -66,12 +63,12 @@ function App() {
       setIsLoading(false);
       alert("Please select a place in the dropdown list");
     }
-
     const response = await fetch("http://0.0.0.0:5006/api/event_information", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
         crossDomain: true,
+        Authorization: { token },
       },
       body: JSON.stringify({
         place_address: address,
@@ -98,8 +95,9 @@ function App() {
   return (
     <div className="container">
       <LoginBar handleLoginClick={handleLoginClick} />
-      <AuthForm isShowLogin={isShowLogin} />
+      <AuthForm isShowLogin={isShowLogin} newToken={setToken} />
       <section>
+        {/* <p>test: {token}</p> */}
         <img id="top-pic" src={backgrounImg} alt="" />
         <PlaceSearch
           isLoading={isLoading}

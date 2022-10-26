@@ -1,5 +1,5 @@
 .auth {
-  margin: 15rem 40%;
+  margin: 15rem 34%;
   width: 95%;
   max-width: 25rem;
   border-radius: 6px;
@@ -9,7 +9,7 @@
   text-align: center;
   z-index: 1;
   position: absolute;
-  height: 50vh;
+  height: 54vh;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
@@ -34,8 +34,8 @@
 
 .control input {
   font: inherit;
-  background-color: #f1e1fc;
-  color: #38015c;
+  background-color: #d9e3f0;
+  color: black;
   border-radius: 4px;
   border: 1px solid white;
   width: 90%;
@@ -57,8 +57,8 @@
   cursor: pointer;
   font: inherit;
   color: black;
-  background-color: #9f5ccc;
-  border: 1px solid #9f5ccc;
+  background-color: #abb8c3;
+  border: 1px solid #abb8c3;
   border-radius: 4px;
   padding: 0.5rem 2.5rem;
 }
@@ -71,7 +71,7 @@
 .actions .toggle {
   margin-top: 1rem;
   background-color: transparent;
-  color: #9f5ccc;
+  color: black;
   border: none;
   padding: 0.15rem 1.5rem;
 }

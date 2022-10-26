@@ -25,6 +25,7 @@ function Weather({
         : setStickyClass("");
     }
   };
+
   return (
     <div className={`navbar ${stickyClass}`}>
       <div className="weather_section">

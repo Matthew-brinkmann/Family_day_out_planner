@@ -1,10 +1,12 @@
 import { useState, useRef } from "react";
 import validator from "validator";
 import classes from "./AuthForm.module.css";
+import bcrypt from "bcryptjs";
 
-const AuthForm = ({ isShowLogin }) => {
+const AuthForm = ({ isShowLogin, newToken }) => {
   const usernameInputRef = useRef();
   const passwordInputRef = useRef();
+  const hashedPassword = bcrypt.genSaltSync(10);
 
   const [isLogin, setIsLogin] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
@@ -12,7 +14,6 @@ const AuthForm = ({ isShowLogin }) => {
     setIsLogin((prevState) => !prevState);
   };
   const [errorMessage, setErrorMessage] = useState("");
-  const [token, setToken] = useState(null);
 
   const validate = (value) => {
     if (
@@ -33,28 +34,27 @@ const AuthForm = ({ isShowLogin }) => {
     event.preventDefault();
 
     const enteredusername = usernameInputRef.current.value;
-    const enteredPassword = passwordInputRef.current.value;
+    // const enteredPassword = passwordInputRef.current.value;
 
     setIsLoading(true);
-    if (!isLogin) {
-      // fetch("http://0.0.0.0:5006/api/test/login_fail");
+    if (isLogin) {
+      // fetch("http://0.0.0.0:5006/api/login");
     } else {
       fetch("http://0.0.0.0:5006/api/test/login_success", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Authorization: { token },
         },
         body: JSON.stringify({
           username: enteredusername,
-          password: enteredPassword,
+          password: hashedPassword,
         }),
       }).then(async (res) => {
         setIsLoading(false);
         if (res.ok) {
           const data = await res.json();
           const formattedData = JSON.parse(data);
-          setToken(formattedData);
+          newToken(formattedData.token);
           console.log(formattedData.token);
         } else {
           const data_2 = await res.json();
