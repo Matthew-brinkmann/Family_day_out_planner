@@ -14,7 +14,7 @@ swagger_config = {
     "specs": [
         {
             "endpoint": 'event_information',
-            "route": '/api/event_information',
+            "route": '/api/events',
             "rule_filter": lambda rule: True,
             "model_filter": lambda tag: True,
         }

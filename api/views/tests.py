@@ -18,7 +18,7 @@ def test_events():
         abort(400, description="Data sent was not correct format")
     return(jsonify(json.dumps(test_return_dto)))
 
-@swag_from("documentation/login_success.yml", methods=['POST'])
+# @swag_from("documentation/login_success.yml", methods=['POST'])
 @app_views.route('test/login_success', methods=['POST'], strict_slashes=False)
 def test_login_success():
     """ returns the test information """
@@ -31,7 +31,7 @@ def test_login_success():
     }
     return(jsonify(json.dumps(test_return_dto)))
 
-@swag_from("documentation/login_fail.yml", methods=['POST'])
+# @swag_from("documentation/login_fail.yml", methods=['POST'])
 @app_views.route('test/login_fail', methods=['POST'], strict_slashes=False)
 def test_login_fail():
     """ returns the test information """
