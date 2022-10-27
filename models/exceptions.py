@@ -70,7 +70,7 @@ class ApiReturnNoneResults(Exception):
     """Exception raised when an API call return 200 response but is empty"""
 
     def __init__(self,
-                 message="No events results for this query"):
+                 message="There was an error retrieving results for this query"):
         """init for exception"""
         self.message = message
         self.methodRaisingThisException = inspect.stack()[2][4][0]
